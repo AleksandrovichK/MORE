@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+.non-outlined:focus {
+  outline:0;
+}
+
+.rounded {
+  border-radius:50%;
+}
+
+.avatar-container{
+  width: 20%;
+  height: 20%;
+}
+
+.profile-text{
+  font-size: 30pt;
+}
+
+.more-container{
+  border: 1px solid #d2d0c1;
+  background-color: #ffffff;
+}
