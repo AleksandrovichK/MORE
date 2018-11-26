@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/basic")
 public class BasicController {
+
     @GetMapping
     public List<String> getAll(){
         List<String> result = new ArrayList<>();
