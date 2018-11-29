@@ -1,11 +1,11 @@
 package com.ibagroup.services.impl;
 
-import java.util.Collection;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.stereotype.Service;
 
 import com.ibagroup.dao.IUserDao;
 import com.ibagroup.dto.User;
@@ -14,23 +14,25 @@ import com.ibagroup.services.IUserService;
 /**
  * @author AleksandrovichK
  */
-@SessionScope
-@Component(value = "userService")
+@Service            // means it is data provider (service)
+@Transactional      // one method determines one transaction
 public class UserService implements IUserService {
+    private final IUserDao dao;
 
     @Autowired
-    private IUserDao<User> dao;
-
-    public void save(User newUser) {
-        dao.save(newUser);
+    private UserService(IUserDao dao) {
+        this.dao = dao;
     }
 
-    public User getById(Long id){
-        return dao.getById(id);
+    public Optional<User> findById(Long id) {
+        return dao.findById(id);
     }
 
-    public Collection getAll() {
-        return dao.getAll();
+    public Long save(User newUser) {
+        return dao.save(newUser).getId();
     }
 
+    public void deleteById(Long id) {
+        dao.deleteById(id);
+    }
 }

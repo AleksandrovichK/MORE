@@ -1,16 +1,16 @@
 package com.ibagroup.dao;
 
-import java.util.Collection;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.ibagroup.dto.User;
 
 /**
+ * Implementation for this interface will be generated automatically. And this implementation
+ * should be injected via @Autowired or @Inject annotation.
+ *
  * @author AleksandrovichK
  */
-public interface IUserDao<T> {
-    User getById(Long id);
-    Collection<T> getAll();
-    void save(T t);
-    void update(T t);
-    void delete(T t);
+@Repository
+public interface IUserDao extends CrudRepository<User, Long> {
 }

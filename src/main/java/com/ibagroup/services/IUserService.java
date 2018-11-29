@@ -1,6 +1,6 @@
 package com.ibagroup.services;
 
-import java.util.Collection;
+import java.util.Optional;
 
 import com.ibagroup.dto.User;
 
@@ -8,9 +8,9 @@ import com.ibagroup.dto.User;
  * @author AleksandrovichK
  */
 public interface IUserService {
-    void save(User newUser);
+    Long save(User newUser);
 
-    User getById(Long id);
+    Optional<User> findById(Long id);
 
-    Collection getAll();
+    void deleteById(Long id);
 }
