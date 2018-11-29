@@ -17,16 +17,16 @@ import javax.persistence.TemporalType;
 @Table(name = "USER")
 public class User {
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     private Long id;
-    @Column(name = "USERNAME", length = 128, nullable = false)
+    @Column(name = "USERNAME", length = 256, nullable = false)
     private String username;
     @Column(name = "EMAIL", length = 64)
     private String email;
     @Column(name = "PASSWORD", length = 64, nullable = false)
     private String password;
     @Temporal(TemporalType.DATE)
-    @Column(name = "BIRTH_DATE")
+    @Column(name = "REG_DATE")
     private Date registrationDate;
     @Column(name = "BALANCE", length = 10)
     private BigDecimal balance;

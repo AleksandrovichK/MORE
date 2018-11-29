@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author AleksandrovichK
  */
+/*
 @Repository
 public abstract class AbstractDao {
 
@@ -21,3 +22,4 @@ public abstract class AbstractDao {
         return null;
     }
 }
+*/
