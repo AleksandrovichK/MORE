@@ -11,6 +11,7 @@ import com.ibagroup.dto.User;
 
 /**
  * @author AleksandrovichK
+ * @author DubininaE
  */
 @Component
 public class UserDao<T> implements IUserDao {
