@@ -20,7 +20,7 @@ public class UserService implements IUserService {
     private final IUserDao dao;
 
     @Autowired
-    private UserService(IUserDao dao) {
+    public UserService(IUserDao dao) {
         this.dao = dao;
     }
 
