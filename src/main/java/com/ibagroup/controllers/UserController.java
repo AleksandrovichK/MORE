@@ -29,6 +29,9 @@ public class UserController {
         this.service = injected;
     }
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Optional<User> findById(@PathVariable("id") Long id) {
         return service.findById(id);
@@ -38,13 +41,10 @@ public class UserController {
     public Long save(@RequestBody User user) {
         return service.save(user);
     }
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") Long id) {
         service.deleteById(id);
     }
-    @Autowired
-    private UserRepository userRepository;
 
     @RequestMapping(method = RequestMethod.PUT, value = "/add")
      public @ResponseBody String addNewUser (@RequestBody User user) {
