@@ -14,8 +14,8 @@ import com.ibagroup.services.IUserService;
 /**
  * @author AleksandrovichK
  */
-@Service            // means it is data provider (service)
-@Transactional      // one method determines one transaction
+@Service
+@Transactional
 public class UserService implements IUserService {
     private final IUserDao dao;
 

@@ -22,7 +22,6 @@ import com.ibagroup.services.IUserService;
 @RequestMapping("/users")
 public class UserController {
     private final IUserService service;
-    // added comment
 
     @Autowired
     private UserController(IUserService injected) {
