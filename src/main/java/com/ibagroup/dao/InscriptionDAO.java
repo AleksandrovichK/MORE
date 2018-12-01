@@ -7,5 +7,5 @@ import com.ibagroup.dto.Inscription;
 /**
  * @author DubininaE
  */
-public interface InscriptionDAO extends CrudRepository<Inscription, String> {
+public interface InscriptionDAO extends CrudRepository<Inscription, Long> {
 }

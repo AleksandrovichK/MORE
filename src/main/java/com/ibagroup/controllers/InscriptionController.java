@@ -1,10 +1,15 @@
 package com.ibagroup.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ibagroup.dao.InscriptionDAO;
 import com.ibagroup.dto.Inscription;
 import com.ibagroup.dto.RestResponse;
+import com.ibagroup.dto.User;
 
 /**
  * @author DubininaE
@@ -33,14 +39,14 @@ public class InscriptionController {
         return "Saved";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{name}")
-    public Optional<Inscription> findById(@PathVariable("name") String name) {
-        return inscriptionDAO.findById(name);
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public Optional<Inscription> findById(@PathVariable("id") Long id) {
+        return inscriptionDAO.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/delete")
-    public void delete(@RequestParam String name) {
-        inscriptionDAO.deleteById(name);
+    public void delete(@RequestParam Long id) {
+        inscriptionDAO.deleteById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/properties")
@@ -56,4 +62,25 @@ public class InscriptionController {
 
         return new RestResponse(properties);
     }
+
+    @GetMapping(path = "/all")
+    public RestResponse getAllUsers() {
+        Map<Long, Inscription> properties = new HashMap<>();
+        properties = Collectors.toMap(Inscription::getId, getCollectionFromIteralbe(inscriptionDAO.findAll()));
+    }
+
+    public static <T> Collection<T>
+    getCollectionFromIteralbe(Iterable<T> itr) {
+        // Create an empty Collection to hold the result
+        Collection<T> cltn = new ArrayList<T>();
+
+        // Iterate through the iterable to
+        // add each element into the collection
+        for (T t : itr)
+            cltn.add(t);
+
+        // Return the converted collection
+        return cltn;
+    }
+
 }
