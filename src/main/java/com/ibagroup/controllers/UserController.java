@@ -44,7 +44,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/add")
-    public @ResponseBody String addNewUser(@RequestBody User user) {
+    public @ResponseBody
+    String addNewUser(@RequestBody User user) {
         userRepository.save(user);
         return "Saved";
     }
