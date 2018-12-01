@@ -15,15 +15,18 @@ export class MainLayoutComponent implements OnInit {
     tab3_description:' ',
   };
 
+  loginDisplay: boolean = false;
+
   constructor(private service: MainLayoutService) {
   }
 
   ngOnInit() {
-    this.service.getPropertiesMap().subscribe(
-      res => {
-        console.log(res);
-        this.properties = res;
-      }
-    );
+    this.service
+      .getPropertiesMap()
+      .subscribe(res => this.properties = res)
+  }
+
+  showDialog() {
+    this.loginDisplay = true;
   }
 }

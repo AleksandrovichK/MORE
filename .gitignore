@@ -1,6 +1,7 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 /src/main/moreangular/node_modules
+/src/main/resources/application.properties
 
 ### Comment ###
 

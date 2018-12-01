@@ -65,22 +65,7 @@ public class InscriptionController {
 
     @GetMapping(path = "/all")
     public RestResponse getAllUsers() {
-        Map<Long, Inscription> properties = new HashMap<>();
-        properties = Collectors.toMap(Inscription::getId, getCollectionFromIteralbe(inscriptionDAO.findAll()));
-    }
-
-    public static <T> Collection<T>
-    getCollectionFromIteralbe(Iterable<T> itr) {
-        // Create an empty Collection to hold the result
-        Collection<T> cltn = new ArrayList<T>();
-
-        // Iterate through the iterable to
-        // add each element into the collection
-        for (T t : itr)
-            cltn.add(t);
-
-        // Return the converted collection
-        return cltn;
+        return new RestResponse(inscriptionDAO.findAll());
     }
 
 }
