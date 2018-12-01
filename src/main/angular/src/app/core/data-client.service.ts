@@ -10,14 +10,17 @@ import {ResponseResult} from './models/response-result';
 export class DataClientService {
   baseUrl = environment.apiUrl;
   header = new HttpHeaders({
-    'content-type': 'application/json',
+    'content-type': 'application/json'
   });
 
   constructor(private http: HttpClient) {
   }
 
   get<T>(url: string, params?: HttpParams): Observable<any> {
-    const res: any =  this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params});
+    const res: any =  this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params}).subscribe(
+    result => console.log('Пришло вот что: ', result)
+    );
+
     return (res.success ? res.data : null);
   }
 
