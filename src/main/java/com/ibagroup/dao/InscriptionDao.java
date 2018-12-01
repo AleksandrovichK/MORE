@@ -7,5 +7,5 @@ import com.ibagroup.dto.Inscription;
 /**
  * @author DubininaE
  */
-public interface InscriptionDAO extends JpaRepository<Inscription, Long> {
+public interface InscriptionDao extends JpaRepository<Inscription, Long> {
 }
