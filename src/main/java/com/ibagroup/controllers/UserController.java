@@ -1,5 +1,6 @@
 package com.ibagroup.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibagroup.dto.User;
-import com.ibagroup.dto.UserRepository;
 import com.ibagroup.services.IUserService;
 
 @RestController
@@ -20,8 +20,6 @@ import com.ibagroup.services.IUserService;
 public class UserController {
     private final IUserService service;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserController(IUserService injected) {
@@ -44,15 +42,10 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/add")
-    public @ResponseBody
-    String addNewUser(@RequestBody User user) {
-        userRepository.save(user);
+    public String addNewUser(@RequestBody User user) {
+        service.save(user);
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+
 }

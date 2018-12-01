@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ibagroup.dao.InscriptionDao;
 import com.ibagroup.dto.Inscription;
 import com.ibagroup.dto.RestResponse;
+import com.ibagroup.services.IInscriptionService;
 
 /**
  * @author DubininaE
@@ -22,10 +22,10 @@ import com.ibagroup.dto.RestResponse;
 @RestController
 @RequestMapping("/ins")
 public class IInscriptionController {
-    private final InscriptionDao service;
+    private final IInscriptionService service;
 
     @Autowired
-    private IInscriptionController(InscriptionDao injected) {
+    private IInscriptionController(IInscriptionService injected) {
         this.service = injected;
     }
 
