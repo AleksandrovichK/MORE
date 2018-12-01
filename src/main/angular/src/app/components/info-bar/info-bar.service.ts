@@ -8,8 +8,9 @@ export class InfoBarService {
   }
 
   getPropertiesMap(): Map<string, any> {
-    const res = this.dataClientService.get('/ins/properties');
-    console.log(res);
+    const res = this.dataClientService.get('/ins/properties').subscribe(
+      res => console.log(res)
+    );
     return new Map<string, any>();
   }
 }

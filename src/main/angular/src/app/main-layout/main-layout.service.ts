@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DataClientService} from '../core/data-client.service';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class MainLayoutService {
@@ -7,11 +8,7 @@ export class MainLayoutService {
   constructor(private dataClientService: DataClientService) {
   }
 
-  getPropertiesMap(): Map<string, any> {
-    this.dataClientService.get('/ins/properties').subscribe(
-      res => console.log('results', res )
-    );
-
-    return new Map<string, any>();
+  getPropertiesMap(): Observable<any> {
+    return this.dataClientService.get('/ins/properties');
   }
 }

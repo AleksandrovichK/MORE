@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {environment} from './environments/environment';
 import {ResponseResult} from './models/response-result';
 
@@ -17,11 +18,9 @@ export class DataClientService {
   }
 
   get<T>(url: string, params?: HttpParams): Observable<any> {
-    const res: any =  this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params}).subscribe(
-    result => console.log('Пришло вот что: ', result)
-    );
-
-    return (res.success ? res.data : null);
+    return this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params})
+      .pipe(
+        map(response => (response? response.data: null)));
   }
 
   post<T>(url: string, body: any = null): Observable<any> {
