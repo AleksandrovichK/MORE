@@ -1,5 +1,7 @@
 package com.ibagroup.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibagroup.dao.InscriptionDAO;
 import com.ibagroup.dto.Inscription;
+import com.ibagroup.dto.RestResponse;
 
 /**
  * @author DubininaE
@@ -40,4 +43,17 @@ public class InscriptionController {
         inscriptionDAO.deleteById(name);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/properties")
+    public RestResponse getProperties() {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("tab1", "Покушать");
+        properties.put("tab2", "Посмотреть");
+        properties.put("tab3", "Поиграться");
+
+        properties.put("tab1_description", "Итальяно ресторано, француано микошиано");
+        properties.put("tab2_description", "Ну музеев там много, прочей херни");
+        properties.put("tab3_description", "Игры игрушки");
+
+        return new RestResponse(properties);
+    }
 }

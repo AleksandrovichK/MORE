@@ -12,6 +12,7 @@ public class DefaultController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String greetings() {
+
         return "Hello!";
     }
 }
