@@ -6,17 +6,25 @@ import {RouterModule} from '@angular/router';
 import {MainLayoutModule} from './main-layout/main-layout.module';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { MenubarComponent } from './menubar/menubar.component';
+import {MenubarModule} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
+import {LoginModule} from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenubarComponent,
   ],
   imports: [
     BrowserModule,
 
-    RouterModule,
     AppRoutingModule,
     MainLayoutModule,
+    LoginModule,
+    MenubarModule,
+    RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
   ],

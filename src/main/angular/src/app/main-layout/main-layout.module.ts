@@ -1,12 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainLayoutService} from './main-layout.service';
 import {MainLayoutComponent} from './main-layout.component';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
+import {LoginComponent} from '../login/login.component';
 
+const routes:Routes =[
+  {
+    path:'login',
+    component:LoginComponent
+  }
+];
 @NgModule({
   imports: [
     RouterModule,
@@ -18,4 +25,5 @@ import {DialogModule} from 'primeng/dialog';
   providers: [MainLayoutService],
   declarations: [MainLayoutComponent]
 })
-export class MainLayoutModule { }
+export class MainLayoutModule {
+}
