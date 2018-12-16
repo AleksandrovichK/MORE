@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MainLayoutService} from './main-layout.service';
+import {MainLayoutService} from '../main-layout.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,16 +15,16 @@ export class MainLayoutComponent implements OnInit {
     tab2_description:' ',
     tab3_description:' ',
   };*/
-  properties$:object;
+  properties:object;
   loginDisplay: boolean = false;
-  tohere1: any;
+
   constructor(private service: MainLayoutService) {
   }
 
   ngOnInit() {
     this.service
       .getPropertiesMap()
-      .subscribe(res => this.properties$ = res)
+      .subscribe(res => this.properties = res)
   }
 
 

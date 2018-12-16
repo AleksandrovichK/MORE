@@ -648,7 +648,7 @@ a:focus, a:active {
 }
 
 .uk-input:focus, .uk-select:focus, .uk-textarea:focus {
-  border-color: #0bd28e;
+  border-color: #187dff;
 }
 
 .uk-input, .uk-select:not([multiple]):not([size]){
@@ -657,7 +657,7 @@ a:focus, a:active {
 
 .uk-input.uk-form-success{
   color:#000000;
-  border-color: #0bd28e;
+  border-color: #187dff;
 }
 
 .uk-list>li:nth-child(n+2), .uk-list>li>ul {

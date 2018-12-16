@@ -3,27 +3,23 @@ import {NgModule} from '@angular/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainLayoutService} from './main-layout.service';
-import {MainLayoutComponent} from './main-layout.component';
-import {RouterModule, Routes} from '@angular/router';
+import {MainLayoutComponent} from './main-layout/main-layout.component';
+import {RouterModule} from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
-import {LoginComponent} from '../login/login.component';
+import {LoginComponent} from './login/login.component';
+import {MainLayoutRoutingModule} from './main-layout.routing';
 
-const routes:Routes =[
-  {
-    path:'login',
-    component:LoginComponent
-  }
-];
 @NgModule({
   imports: [
     RouterModule,
+    MainLayoutRoutingModule,
     CommonModule,
     FormsModule,
     DialogModule,
     ReactiveFormsModule
   ],
   providers: [MainLayoutService],
-  declarations: [MainLayoutComponent]
+  declarations: [MainLayoutComponent, LoginComponent]
 })
 export class MainLayoutModule {
 }

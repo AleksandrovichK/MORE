@@ -21,3 +21,18 @@
   border: 1px solid #d2d0c1;
   background-color: #ffffff;
 }
+
+.blue-coloured-background{
+  background-color: rgba(11, 191, 126, 0.24);
+}
+.margin-left-50-percents{
+  margin-left: 30%;
+}
+
+.login-button{
+  color: #159b78;
+}
+
+.login-padding{
+  padding: 1%;
+}
