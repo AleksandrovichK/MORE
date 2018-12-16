@@ -1,34 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {MainLayoutService} from '../main-layout.service';
 
+declare var ymaps:any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './main-layout.component.html'
 })
 
 export class MainLayoutComponent implements OnInit {
- /* properties = {
-    tab1:' ',
-    tab2:' ',
-    tab3:' ',
-    tab1_description:' ',
-    tab2_description:' ',
-    tab3_description:' ',
-  };*/
-  properties:object;
-  loginDisplay: boolean = false;
+  properties: object;
+  public map :any;
 
   constructor(private service: MainLayoutService) {
   }
 
   ngOnInit() {
-    this.service
-      .getPropertiesMap()
-      .subscribe(res => this.properties = res)
+    ymaps.ready(this.initMap.bind(this));
   }
 
+  initMap() {
+  this.map = new ymaps.Map('map', {
+    center: [50.450100, 30.523400],
+    zoom: 6
+  });
 
-  showDialog() {
-    this.loginDisplay = true;
-  }
-}
+}}
