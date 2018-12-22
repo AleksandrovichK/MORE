@@ -14,4 +14,5 @@ export class MainLayoutService {
   getPropertiById(PropertyID): Observable<any> {
     return this.dataClientService.get('/ins/properties');
   }
+
 }

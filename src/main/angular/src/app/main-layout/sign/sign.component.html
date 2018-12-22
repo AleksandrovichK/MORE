@@ -1,0 +1,36 @@
+<div class="uk-text-center uk-position-center uk-width-1-2">
+  <div class="uk-card uk-card-default uk-card-body">
+    <div class="uk-card-badge uk-label">Регистрация</div>
+    <!--<h3 class="uk-card-title">Регистрация</h3>
+    <p>Введите ваш логин и пароль</p>-->
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <p class="text-info">Login</p>
+          <input formControlName="login" class="uk-input"/>
+
+        </div>
+      </div>
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <p class="text-info">email</p>
+          <input formControlName="email" class="uk-input" />
+
+        </div>
+      </div>
+      <div class="uk-margin">
+        <div class="uk-inline">
+          <p class="text-info">Password</p>
+          <input formControlName="password" type="password" pPassword />
+
+        </div>
+      </div>
+
+      <button class="uk-button" type="submit">Сохранить</button>
+      <!--<button class="uk-button" >Не сохранять</button> -->
+    </form>
+  </div>
+</div>
