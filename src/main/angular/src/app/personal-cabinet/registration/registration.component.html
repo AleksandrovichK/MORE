@@ -1,0 +1,32 @@
+<div class="uk-text-center uk-position-center uk-width-1-2">
+  <div class="uk-card uk-card-default uk-card-body">
+    <h3 class="uk-card-title">Добро пожаловать на наш сайт</h3>
+    <p>Заполните регистрационную форму</p>
+
+    <div class="uk-margin-top">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <input class="uk-input" formControlName="login" type="text" placeholder="Логин"/>
+          </div>
+          <div class="uk-width-1-2@s">
+            <input class="uk-input" formControlName="password" type="password" placeholder="Пароль"/>
+          </div>
+          <div class="uk-width-1-1">
+            <input class="uk-input" formControlName="name" type="text" placeholder="Имя и фамилия"/>
+          </div>
+          <div class="uk-width-1-3@s">
+            <input class="uk-input" formControlName="email" type="email" placeholder="E-mail"/>
+          </div>
+          <div class="uk-width-1-3@s">
+            <input class="uk-input" formControlName="home" type="text" placeholder="Место жительства"/>
+          </div>
+          <div class="uk-width-1-3@s">
+            <p-calendar formControlName="birthday" placeholder="Дата рождения"></p-calendar>
+          </div>
+        </div>
+        <button class="uk-button uk-margin-large-top uk-text-center button-continue" type="submit">Зарегистрироваться</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -6,9 +6,9 @@ import {MainLayoutService} from './main-layout.service';
 import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {RouterModule} from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from '../personal-cabinet/login/login.component';
 import {MainLayoutRoutingModule} from './main-layout.routing';
-import  {SignComponent} from './sign/sign.component';
+import  {RegistrationComponent} from '../personal-cabinet/registration/registration.component';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import  {SignComponent} from './sign/sign.component';
     ReactiveFormsModule
   ],
   providers: [MainLayoutService],
-  declarations: [MainLayoutComponent, LoginComponent, SignComponent]
+  declarations: [MainLayoutComponent]
 })
 export class MainLayoutModule {
 }

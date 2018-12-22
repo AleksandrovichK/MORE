@@ -3,7 +3,7 @@ body{
   background: #f3f7ff;
   min-height: 100vh;
   color:#3e444c;
-  /*overflow-y: hidden;*/
+
 }
 
 .loader{
@@ -164,7 +164,7 @@ ul.uk-accordion{
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
-  /* font-weight: bold; */
+  /*font-weight: bold; */
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -368,10 +368,10 @@ ul.uk-accordion{
 
 .hidemenu:hover {
   background: #23282C;
-  
+
 }
 
-.hidemenu img{   
+.hidemenu img{
   width: 25px;
 }
 
@@ -405,10 +405,9 @@ ul.uk-accordion{
 }
 
 .panel-title img{
- 
+
   width: 30px;
   padding-right: 5px;
-  /* padding-left: 5px; */
   padding-bottom: 5px;
 }
 .panel-title {
@@ -446,7 +445,7 @@ ul.uk-accordion{
 .sidebar a{
   width: 100%;
   display: block;
-  color: #ffffff; 
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -465,13 +464,12 @@ ul.uk-accordion{
   top: 70px;
   left: 250px;
   padding: 10px 15px;
- /* background: #f3f7ff;  it is HERE*/
 }
 
 
 .sbheader{
   display: inline-block;
-  width: 25px;   
+  width: 25px;
 }
 .sbheader2{
   display: inline-block;
@@ -484,10 +482,9 @@ ul.uk-accordion{
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {display:none;}
 
-/* The slider */
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -526,7 +523,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
+
 .slider.round {
   border-radius: 34px;
 }
@@ -549,8 +546,8 @@ input:checked + .slider:before {
 
 .panel > .list-group:last-child .list-group-item:last-child, .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
    border-bottom: 0;
-   border-bottom-right-radius: 0px; 
-   border-bottom-left-radius: 0px; 
+   border-bottom-right-radius: 0px;
+   border-bottom-left-radius: 0px;
 }
 
 a:focus, a:active {
@@ -568,7 +565,7 @@ a:focus, a:active {
   border-radius: 0px;
   width: 250px;
   padding: 0;
-  
+
 }
 
 .dropdown-menu li{
@@ -586,13 +583,13 @@ a:focus, a:active {
   background: transparent;
 }
 
-.uk-grid {
+/*.uk-grid {
   margin-left:0px;
-}
+}*/
 
-.uk-grid>* {
+/*.uk-grid>* {
   padding-left: 0px;
-}
+}*/
 
 .uk-padding {
   padding: 10px;
@@ -661,7 +658,7 @@ a:focus, a:active {
 }
 
 .uk-list>li:nth-child(n+2), .uk-list>li>ul {
-   margin-top: 0px; 
+   margin-top: 0px;
 }
 
 .uk-form-controls{
@@ -788,12 +785,12 @@ th.sort::after{
   height: 25px;
 }
 
-/* .uk-table.expanded tr td .uk-input{
+/*.uk-table.expanded tr td .uk-input{
   height: 30px;
 } */
 
 
-/* Multiple select START*/
+/*Multiple select START*/
 .uk-select.multiple+.btn-group{
   width:100%;
 }
@@ -852,7 +849,7 @@ th.sort::after{
   margin-top: 4px;
 }
 
-/* Multiple Select END*/
+/*Multiple Select END*/
 
 
 
@@ -1069,6 +1066,7 @@ li.divider, tr.divider{
   top: 10px;
 }
 
+
 .flat i{
   font-size: 15px;
   color: #363b3f;
@@ -1143,7 +1141,6 @@ li.divider, tr.divider{
   min-width: 250px;
 }
 
-/* Alerts */
 .alert-board{
   position: fixed;
   bottom: 10px;
@@ -1187,9 +1184,7 @@ li.divider, tr.divider{
   top: 70px;
 }
 
-/* START side-close menu */
 .aside.side-close .sidebar{
-  /* left: -150px; */
   left: 0px;
   width: 60px;
 }
@@ -1244,7 +1239,6 @@ li.divider, tr.divider{
 .aside.side-close .dr-cont > li{
   background: #27282a;
 }
-/* END side-close menu */
 
 .selected-item{
   display: inline-block;
@@ -1278,7 +1272,6 @@ li.divider, tr.divider{
   min-width: 200px;
 }
 
-/* Matrix STYLES START */
 .uk-table.matrix{
   width: auto;
 }
@@ -1353,7 +1346,6 @@ li.divider, tr.divider{
 }
 
 .ui-calendar .ui-inputtext {
-  /* width: 90px; */
   width: 90%;
   height: 25px;
   border-radius: 0px;
@@ -1626,7 +1618,6 @@ body .ui-datatable-data tr.ui-state-highlight span,
 
 .ui-treetable th.ui-state-default {
   background: #fff;
-  border-color: none;
 }
 
 .ui-treetable .ui-widget-content {

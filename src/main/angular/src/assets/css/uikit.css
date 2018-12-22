@@ -1404,7 +1404,7 @@ button.uk-icon:not(:disabled) {
  */
 .uk-input,
 .uk-select:not([multiple]):not([size]) {
-  height: 40px;
+  height: 30px;
   vertical-align: middle;
   /* 1 */
   display: inline-block;
@@ -3505,7 +3505,7 @@ select.uk-form-width-xsmall {
  * Input
  */
 .uk-search-default .uk-search-input {
-  height: 40px;
+  height: 30px;
   padding-left: 6px;
   padding-right: 6px;
   background: transparent;
@@ -3536,7 +3536,7 @@ select.uk-form-width-xsmall {
  * Input
  */
 .uk-search-navbar .uk-search-input {
-  height: 40px;
+  height: 30px;
   background: transparent;
   font-size: 1.5rem;
 }

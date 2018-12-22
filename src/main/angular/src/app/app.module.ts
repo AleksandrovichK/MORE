@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {PersonalCabinetModule} from './personal-cabinet/personal-cabinet.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     RouterModule,
     AppRoutingModule,
     MainLayoutModule,
+    PersonalCabinetModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule
