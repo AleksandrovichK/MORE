@@ -24,3 +24,8 @@ export class CabComponent implements OnInit {
     this.router.navigate(['']);
   }
 }
+export class ModelComponent {
+
+  value: boolean;
+
+}
