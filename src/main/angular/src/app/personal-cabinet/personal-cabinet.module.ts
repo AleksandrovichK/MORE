@@ -7,11 +7,11 @@ import {PersonalCabinetRouting} from './personal-cabinet.routing';
 import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {CalendarModule} from 'primeng/calendar';
+import {CabComponent} from "./cab/cab.component";
 
 @NgModule({
   imports: [
     CalendarModule,
-
     RouterModule,
     PersonalCabinetRouting,
     CommonModule,
@@ -19,7 +19,7 @@ import {CalendarModule} from 'primeng/calendar';
     DialogModule,
     ReactiveFormsModule
   ],
-  declarations: [LoginComponent, RegistrationComponent]
+  declarations: [LoginComponent, RegistrationComponent, CabComponent]
 })
 export class PersonalCabinetModule {
 }
