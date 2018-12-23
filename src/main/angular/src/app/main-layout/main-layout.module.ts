@@ -9,6 +9,8 @@ import {DialogModule} from 'primeng/dialog';
 import {LoginComponent} from '../personal-cabinet/login/login.component';
 import {MainLayoutRoutingModule} from './main-layout.routing';
 import  {RegistrationComponent} from '../personal-cabinet/registration/registration.component';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import  {RegistrationComponent} from '../personal-cabinet/registration/registrat
     CommonModule,
     FormsModule,
     DialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MultiSelectModule,
+    RadioButtonModule
   ],
   providers: [MainLayoutService],
   declarations: [MainLayoutComponent]

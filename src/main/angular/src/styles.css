@@ -29,10 +29,20 @@
   margin-left: 30%;
 }
 
-.button-continue {
+.button-blue {
   text-decoration: none;
   background: rgb(23, 86, 199);
   color: #ffffff;
+}
+
+.button-red{
+  text-decoration: none;
+  background: rgb(199, 18, 5);
+  color: #ffffff;
+}
+
+.fonted {
+  font-size: 13px;
 }
 
 .undecorated-button {

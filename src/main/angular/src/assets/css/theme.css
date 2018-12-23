@@ -991,7 +991,7 @@ li.divider, tr.divider{
 
 .uk-form-icon.uk-form-icon-flip.uk-icon:hover{
   cursor: pointer;
-  color:#0bd28e;
+  color: #1756c7;
 }
 
 .user-search{
@@ -1440,7 +1440,7 @@ body .ui-multiselect .ui-multiselect-label{
   font-weight: normal;
   padding: 2px 0px;
   margin: 0;
-  color: #55595c;
+  color: #afaaaa;
   overflow-y: hidden;
   height: 19px;
 }
