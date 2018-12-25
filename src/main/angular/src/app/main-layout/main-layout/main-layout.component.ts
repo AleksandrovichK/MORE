@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {MainLayoutService} from '../main-layout.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-declare var ymaps: any;
+import { MainLayoutService } from '../main-layout.service';
+
+declare const ymaps: any;
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './main-layout.component.html'
 })
-
 export class MainLayoutComponent implements OnInit {
   properties: object;
   travelWays = [
@@ -18,6 +18,13 @@ export class MainLayoutComponent implements OnInit {
     {label: 'Машиной', value: {id: 4}},
     {label: 'Пешком', value: {id: 5}}
   ];
+  info: string;
+  listFrom: string[] = [];
+  listTo: string[] = [];
+
+  loadingFrom = false;
+  loadingTo = false;
+
   searchForm: FormGroup = this.builder.group({
       from: [null],
       to: [null],
@@ -25,15 +32,61 @@ export class MainLayoutComponent implements OnInit {
     }
   );
 
-  constructor(private service: MainLayoutService, private builder: FormBuilder) {
-  }
+  constructor(private service: MainLayoutService, private builder: FormBuilder) {}
 
   ngOnInit() {
     ymaps.ready(this.initMap.bind(this));
   }
 
+  public async searchFrom(query) {
+    if (query.length <= 2) {
+      return;
+    }
+
+    this.loadingFrom = true;
+    const map = await ymaps.geocode(query, { results: 5 });
+    this.loadingFrom = false;
+
+    this.listFrom = [];
+
+    map.geoObjects.each((city) => {
+      if (city.properties.get('metaDataProperty.GeocoderMetaData.kind') === 'locality') {
+        this.listFrom.push(city.properties.get('name'));
+      }
+    });
+  }
+
+  public async searchTo(query) {
+    if (query.length <= 2) {
+      return;
+    }
+
+    this.loadingTo = true;
+    const map = await ymaps.geocode(query, { results: 5 });
+    this.loadingTo = false;
+
+    this.listTo = [];
+
+    map.geoObjects.each((city) => {
+      if (city.properties.get('metaDataProperty.GeocoderMetaData.kind') === 'locality') {
+        this.listTo.push(city.properties.get('name'));
+      }
+    });
+
+    console.log(this.listTo);
+  }
+
+  public selectFrom(suggestion) {
+    this.listFrom = [];
+    console.log(suggestion);
+  }
+
+  public selectTo(suggestion) {
+    this.listTo = [];
+    console.log(suggestion);
+  }
+
   onSubmit() {
-    alert('SEARCHING');
   }
 
   initMap() {
@@ -46,8 +99,7 @@ export class MainLayoutComponent implements OnInit {
 
     ymaps.geolocation.get({
       provider: 'browser',
-      /*mapStateAutoApply: true*/
-    }).then(function (result) {
+    }).then((result) => {
       result.geoObjects.options.set('preset', 'islands#redDotIcon');
       map.geoObjects.add(result.geoObjects);
     });
@@ -58,9 +110,9 @@ export class MainLayoutComponent implements OnInit {
   }
 
   private configureMapClicking(map) {
-    var myPlacemark;
-    map.events.add('click', function (e) {
-      var coords = e.get('coords');
+    let myPlacemark;
+    map.events.add('click', (e) => {
+      const coords = e.get('coords');
 
       if (myPlacemark) {
         myPlacemark.geometry.setCoordinates(coords);
@@ -72,6 +124,7 @@ export class MainLayoutComponent implements OnInit {
           getAddress(myPlacemark.geometry.getCoordinates());
         });
       }
+      map.setCenter(ymaps.geoQuery(coords).getCenter());
       getAddress(coords);
     });
 
@@ -85,26 +138,23 @@ export class MainLayoutComponent implements OnInit {
       });
     }
 
-    var self = this;
-
     function getAddress(coords) {
-      /*myPlacemark.properties.set('iconCaption', 'поиск...');*/
-      ymaps.geocode(coords).then(function (res) {
+      ymaps.geocode(coords).then((res) => {
         var firstGeoObject = res.geoObjects.get(0);
 
-     /*   myPlacemark.properties.set({
-          // Формируем строку с данными об объекте.
-          iconCaption: [
-            // Название населенного пункта или вышестоящее административно-территориальное образование.
-            firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas()/!*,
-            // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
-            firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()*!/
-          ].filter(Boolean).join(', '),
-          // В качестве контента балуна задаем строку с адресом объекта.
-          balloonContent: firstGeoObject.getAddressLine()
-        });*/
+        /*   myPlacemark.properties.set({
+             // Формируем строку с данными об объекте.
+             iconCaption: [
+               // Название населенного пункта или вышестоящее административно-территориальное образование.
+               firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas()/!*,
+               // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
+               firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()*!/
+             ].filter(Boolean).join(', '),
+             // В качестве контента балуна задаем строку с адресом объекта.
+             balloonContent: firstGeoObject.getAddressLine()
+           });*/
 
-        self.searchForm.patchValue({
+        this.searchForm.patchValue({
           to: firstGeoObject.getLocalities(),
         });
       });

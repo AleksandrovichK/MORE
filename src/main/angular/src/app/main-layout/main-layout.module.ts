@@ -6,11 +6,12 @@ import {MainLayoutService} from './main-layout.service';
 import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {RouterModule} from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
-import {LoginComponent} from '../personal-cabinet/login/login.component';
 import {MainLayoutRoutingModule} from './main-layout.routing';
-import  {RegistrationComponent} from '../personal-cabinet/registration/registration.component';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AutocompleteComponent} from './autocomplete/autocomplete.component';
 
 @NgModule({
   imports: [
@@ -18,13 +19,13 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     MainLayoutRoutingModule,
     CommonModule,
     FormsModule,
-    DialogModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MultiSelectModule,
     RadioButtonModule
   ],
   providers: [MainLayoutService],
-  declarations: [MainLayoutComponent]
+  declarations: [MainLayoutComponent, AutocompleteComponent]
 })
 export class MainLayoutModule {
 }
