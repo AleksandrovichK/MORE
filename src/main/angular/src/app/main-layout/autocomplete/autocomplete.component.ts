@@ -27,6 +27,8 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
   @Input()
   public loading = false;
   @Input()
+  public defaultText = '';
+  @Input()
   public suggestions = [];
   @Output()
   public valueChanges = new EventEmitter<string>();

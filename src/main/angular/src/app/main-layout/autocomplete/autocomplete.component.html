@@ -1,4 +1,4 @@
-<input class="uk-width-1-1" autocomplete="off" #autocomplete>
+<input class="uk-width-1-1" autocomplete="off" placeholder="{{defaultText}}" #autocomplete>
 
 <div class="spinner" *ngIf="loading">
     <svg class="lds-coolors" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;">
@@ -24,7 +24,8 @@
             </rect>
         </g>
     </svg>
-</div><ng-container *ngIf="suggestions.length">
+</div>
+<ng-container *ngIf="suggestions.length">
   <div class="suggestions" *ngFor="let suggestion of suggestions" @fadeIn>
     <div class="suggestion" (click)="selectSuggestion.emit(suggestion); autocomplete.value = suggestion">{{ suggestion }}</div>
   </div>

@@ -2,12 +2,23 @@
   position: relative;
 
   input {
-    padding: .5em;
-    color: #333;
+    padding: 0.429em 2em 0.429em 0.429em;
     border: 1px solid #a6a6a6;
+
+    color: #333333;
+    font-weight: normal;
+    margin: 0;
+    overflow-y: hidden;
+    height: 25px;
+    text-overflow: ellipsis;
+    border-radius: 3px;
+    text-decoration: none;
 
     &:focus {
       outline: 0;
+    }
+    &::placeholder{
+      color: #333333;
     }
   }
 
@@ -25,16 +36,21 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     width: 100%;
     box-sizing: border-box;
+  }
 
-    .suggestion {
-      padding: 0.3em 0.5em;
-      color: #333;
 
-      &:hover {
-        color: #fff;
-        cursor: pointer;
-        background-color: #007ad9;
-      }
+  .suggestion {
+/*    position: relative;
+    z-index: 1001;
+    display: block;*/
+
+    padding: 0.3em 0.5em;
+    color: #333;
+
+    &:hover {
+      color: #fff;
+      cursor: pointer;
+      background-color: #007ad9;
     }
   }
 }
