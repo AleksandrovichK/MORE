@@ -29,6 +29,12 @@
     height: 30px;
   }
 
+  .suggestions-wrapper{
+    z-index: 1;
+    width: 100%;
+    position: absolute;
+  }
+
   .suggestions {
     position: relative;
     border: 1px solid #c8c8c8;

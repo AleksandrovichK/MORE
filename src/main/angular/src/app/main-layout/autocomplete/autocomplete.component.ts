@@ -54,4 +54,9 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  hideSuggestions() {
+    this.suggestions = [];
+  }
 }
+
