@@ -93,7 +93,8 @@ export class MainLayoutComponent implements OnInit {
   initMap() {
     var map = new ymaps.Map('map', {
       center: [50.450100, 30.523400],
-      zoom: 5
+      zoom: 5,
+      controls: []
     });
 
     map.setType('yandex#hybrid');

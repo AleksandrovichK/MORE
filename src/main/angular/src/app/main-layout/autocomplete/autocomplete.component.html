@@ -1,4 +1,4 @@
-<input class="uk-width-1-1" autocomplete="off" (blur)="hideSuggestions()" placeholder="{{defaultText}}" #autocomplete>
+<input class="uk-width-1-1" autocomplete="off" onblur="hideSuggestions()" placeholder="{{defaultText}}" #autocomplete>
 
 <div class="spinner" *ngIf="loading">
   <svg xmlns:xlink="http://www.w3.org/1999/xlink" class="lds-coolors" width="30px" height="30px"
