@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    const formValue = this.loginForm.value;
+
     this.router.navigate(['']);
   }
 }

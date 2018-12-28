@@ -37,4 +37,5 @@ export class DataClientService {
     const res: any = this.http.delete(this.baseUrl + url, {headers: this.header, params: params});
     return (res.success ? res.data : null);
   }
+
 }
