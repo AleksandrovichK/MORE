@@ -27,7 +27,7 @@ export class CabComponent implements OnInit {
   ngOnInit() {
     this.service
       .getUserById(1)
-      .subscribe(data => {
+      .subscribe(data =>
         this.userForm.patchValue({
           id: data.id,
           username: data.username,
@@ -37,9 +37,7 @@ export class CabComponent implements OnInit {
           registrationDate: data.registrationDate,
           userTypeId: data.userTypeId,
           isDeleted: data.isDeleted
-        });
-      });
-
+        }));
   }
 
   onSubmit() {
@@ -47,7 +45,7 @@ export class CabComponent implements OnInit {
 
     /***
      * На сохранение формы - берёшь текущее её значение и отправляешь в сервис. Бэк замапит твой JSON на DTO-шку. По сути всё.*//*
-    const formValue = {...this.userForm};
-    this.service.setUser(formValue);*/
+        const formValue = {...this.userForm};
+        this.service.setUser(formValue);*/
   }
 }
