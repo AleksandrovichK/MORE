@@ -79,12 +79,10 @@ export class MainLayoutComponent implements OnInit {
 
   public selectFrom(suggestion) {
     this.listFrom = [];
-    console.log(suggestion);
   }
 
   public selectTo(suggestion) {
     this.listTo = [];
-    console.log(suggestion);
   }
 
   onSubmit() {

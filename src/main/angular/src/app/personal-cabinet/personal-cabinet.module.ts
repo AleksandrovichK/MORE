@@ -10,6 +10,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {CabComponent} from "./cab/cab.component";
 import {CheckboxModule} from 'primeng/checkbox';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {PersonalCabinetService} from './personal-cabinet.service';
 
 
 @NgModule({
@@ -18,13 +19,14 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     RouterModule,
     PersonalCabinetRouting,
     CommonModule,
-    FormsModule,
     DialogModule,
+    FormsModule,
     ReactiveFormsModule,
     CheckboxModule,
     SelectButtonModule
   ],
-  declarations: [LoginComponent, RegistrationComponent, CabComponent]
+  declarations: [LoginComponent, RegistrationComponent, CabComponent],
+  providers: [PersonalCabinetService]
 })
 export class PersonalCabinetModule {
 }
