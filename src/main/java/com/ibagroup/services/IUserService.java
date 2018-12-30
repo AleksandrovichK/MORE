@@ -10,8 +10,6 @@ import com.ibagroup.dto.User;
 public interface IUserService {
     Long save(User newUser);
 
-    Long change(User newUser);
-
     Optional<User> findById(Long id);
 
     void deleteById(Long id);
