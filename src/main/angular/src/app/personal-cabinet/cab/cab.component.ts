@@ -10,12 +10,12 @@ import {PersonalCabinetService} from '../personal-cabinet.service';
 })
 export class CabComponent implements OnInit {
   userForm: FormGroup = this.builder.group({
-      id: [null],
-      username: [null],
-      password: [null],
-      email: [null],
-      balance: [null],
-      registrationDate: [null],
+      id: [1],
+      username: ['noname'],
+      password: ['noname'],
+      email: ['noname'],
+      balance: [-1000],
+      registrationDate: ['00.00.00'],
       userTypeId: [null],
       isDeleted: [null]
     }
@@ -41,6 +41,7 @@ export class CabComponent implements OnInit {
   }
 
   onSubmit() {
+    this.service.ChangeUser(this.userForm.getRawValue());
     this.router.navigate(['']);
 
     /***

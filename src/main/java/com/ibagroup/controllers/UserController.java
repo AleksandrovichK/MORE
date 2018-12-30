@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.ws.rs.core.Response;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,7 @@ public class UserController {
         // 3. ВСЕ методы в контроллере, кроме void должны возвращать Response
         // 4. а соответственно строка с return это всегда Response.ok( new RestResponse ( RESULT)).build() чтобы правильно сбилдить ответ
         return Response.ok(new RestResponse(service.findById(id))).build();
+
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")

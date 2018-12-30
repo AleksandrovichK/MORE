@@ -24,15 +24,15 @@ public class User {
     private Long id;
     @Column(name = "USERNAME", length = 256, nullable = false)
     private String username;
-    @Column(name = "EMAIL", length = 64)
-    private String email;
     @Column(name = "PASSWORD", length = 64, nullable = false)
     private String password;
+    @Column(name = "EMAIL", length = 64)
+    private String email;
+    @Column(name = "BALANCE", length = 10)
+    private BigDecimal balance;
     @Temporal(TemporalType.DATE)
     @Column(name = "REG_DATE")
     private Date registrationDate;
-    @Column(name = "BALANCE", length = 10)
-    private BigDecimal balance;
     @Column(name = "USER_TYPE_ID", length = 10)
     private Short userTypeId;
     @Column(name = "IS_DELETED_FLAG")
