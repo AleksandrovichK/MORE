@@ -10,13 +10,13 @@ import {PersonalCabinetService} from '../personal-cabinet.service';
 })
 export class CabComponent implements OnInit {
   userForm: FormGroup = this.builder.group({
-      id: [1],
-      username: ['noname'],
-      password: ['noname'],
-      email: ['noname'],
-      balance: [-1000],
-      registrationDate: ['00.00.00'],
-      userTypeId: [null],
+      id: [0],
+      username: [''],
+      password: [''],
+      email: [''],
+      balance: [''],
+      registrationDate: [new Date()],
+      userTypeId: [''],
       isDeleted: [null]
     }
   );
@@ -27,26 +27,24 @@ export class CabComponent implements OnInit {
   ngOnInit() {
     this.service
       .getUserById(1)
-      .subscribe(data =>
+      .subscribe(data => {
+        console.log(data);
+
         this.userForm.patchValue({
           id: data.id,
           username: data.username,
           password: data.password,
           email: data.email,
           balance: data.balance,
-          registrationDate: data.registrationDate,
+          registrationDate: new Date(data.registrationDate),
           userTypeId: data.userTypeId,
           isDeleted: data.isDeleted
-        }));
+        });
+      });
   }
 
   onSubmit() {
-    this.service.ChangeUser(this.userForm.getRawValue());
-    this.router.navigate(['']);
-
-    /***
-     * На сохранение формы - берёшь текущее её значение и отправляешь в сервис. Бэк замапит твой JSON на DTO-шку. По сути всё.*//*
-        const formValue = {...this.userForm};
-        this.service.setUser(formValue);*/
+    this.service.saveUser(this.userForm.getRawValue());
+    /*this.router.navigate(['']);*/
   }
 }

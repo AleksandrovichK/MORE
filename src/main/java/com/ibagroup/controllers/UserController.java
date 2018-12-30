@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.ws.rs.core.Response;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,8 +38,14 @@ public class UserController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/")
-    public Long save(@RequestBody User user) {
+    @RequestMapping(method = RequestMethod.PUT, value = "/") // Зачем тут было /add? В REST сервисах в путях строго запрещено использовать глаголы
+    public String save(@RequestBody User user) {
+        service.save(user);
+        return "Saved";
+    }
+	
+    @RequestMapping(method = RequestMethod.POST, value = "/") // Тот же что сверху? Оставь только один какой-то. Нам столько не надо. Его можно использовать и для создания и для обновления юзера. Значит вполне пойдёт единый POST запрос. Без глаголов в пути.
+    public Long createUser(@RequestBody User user) {
         return service.save(user);
     }
 
@@ -49,10 +54,5 @@ public class UserController {
         service.deleteById(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add")
-    public String addNewUser(@RequestBody User user) {
-        service.save(user);
-        return "Saved";
-    }
 
 }

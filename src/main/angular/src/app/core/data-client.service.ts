@@ -20,7 +20,7 @@ export class DataClientService {
   get<T>(url: string, params?: HttpParams): Observable<any> {
     return this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params})
       .pipe(
-        map(response => (response? response.data: null)));
+        map(response => (response? response.entity.data: null)));
   }
 
   post<T>(url: string, body: any = null): Observable<any> {
