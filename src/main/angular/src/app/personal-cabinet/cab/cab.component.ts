@@ -10,7 +10,7 @@ import {PersonalCabinetService} from '../personal-cabinet.service';
 })
 export class CabComponent implements OnInit {
   userForm: FormGroup = this.builder.group({
-      id: [0],
+      id: [1],
       username: [''],
       password: [''],
       email: [''],
@@ -18,8 +18,7 @@ export class CabComponent implements OnInit {
       registrationDate: [new Date()],
       userTypeId: [''],
       isDeleted: [null]
-    }
-  );
+    });
 
   constructor(private builder: FormBuilder, private router: Router, private service: PersonalCabinetService) {
   }
@@ -28,8 +27,6 @@ export class CabComponent implements OnInit {
     this.service
       .getUserById(1)
       .subscribe(data => {
-        console.log(data);
-
         this.userForm.patchValue({
           id: data.id,
           username: data.username,
@@ -44,8 +41,8 @@ export class CabComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.userForm.getRawValue())
-    this.service.saveUser(this.userForm.getRawValue());
-    /*this.router.navigate(['']);*/
+    this.service
+      .saveUser(this.userForm.getRawValue())
+      .subscribe(res => console.log('Object\'s ID:', res));
   }
 }

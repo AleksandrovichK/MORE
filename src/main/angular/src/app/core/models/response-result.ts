@@ -1,3 +1,4 @@
 export class ResponseResult<T> {
-  entity: { data: T };
+  data: T;
+  success: boolean;
 }

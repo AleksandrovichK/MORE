@@ -20,22 +20,23 @@ export class DataClientService {
   get<T>(url: string, params?: HttpParams): Observable<any> {
     return this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params})
       .pipe(
-        map(response => (response? response.entity.data: null)));
+        map(response => (response.success ? response.data : null)));
   }
 
   post<T>(url: string, body: any = null): Observable<any> {
-    const res: any = this.http.post<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header});
-    return (res.success ? res.data : null);
+    return this.http.post<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header})
+      .pipe(
+        map(response => (response.success ? response.data : null)));
   }
 
   put<T>(url: string, body: any = null): Observable<any> {
-    const res: any = this.http.put<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header});
-    return (res.success ? res.data : null);
+    return this.http.put<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header})
+      .pipe(
+        map(response => (response.success ? response.data : null)));
   }
 
-  delete(url: string, params?: HttpParams): Observable<any> {
-    const res: any = this.http.delete(this.baseUrl + url, {headers: this.header, params: params});
-    return (res.success ? res.data : null);
+  delete(url: string, params?: HttpParams) {
+    this.http.delete(this.baseUrl + url, {headers: this.header, params: params});
   }
 
 }
