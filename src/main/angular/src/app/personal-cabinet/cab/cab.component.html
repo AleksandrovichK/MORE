@@ -8,20 +8,18 @@
     <div class="uk-margin-top">
       <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
         <div class="uk-grid-small" uk-grid>
-          <div class="uk-width-1-2@s">
-            <input class="uk-input" formControlName="id" placeholder="ID" type="text"/>
-          </div>
-          <div class="uk-width-1-2@s">
-            <input class="uk-input" formControlName="password" placeholder="" type="password"/>
+
+          <div class="uk-width-1-2">
+            <input class="uk-input uk-margin" formControlName="username" placeholder="Имя и фамилия" type="text"/>
+            <input class="uk-input uk-margin" formControlName="id" placeholder="ID" type="text"/>
+            <input class="uk-input uk-margin" formControlName="email" placeholder="E-mail" type="email"/>
+            <input class="uk-input uk-margin" formControlName="password" placeholder="" type="password"/>
           </div>
 
-          <div class="uk-width-1-1">
-            <input class="uk-input" formControlName="username" placeholder="Имя и фамилия" type="text"/>
+          <div class="uk-width-1-2">
+            <img class="rounded avatar" alt="userphoto" src="https://pp.userapi.com/WGcYjEGLQGBBXsD2ovJ8a8U_DfYes3R0q1ZSyA/g7qR_LaRmy4.jpg">
           </div>
 
-          <div class="uk-width-1-3@s">
-            <input class="uk-input" formControlName="email" placeholder="E-mail" type="email"/>
-          </div>
           <div class="uk-width-1-3@s">
             <input class="uk-input" formControlName="balance" placeholder="Баланс" type="text"/>
           </div>
@@ -35,12 +33,9 @@
           <div class="uk-width-1-2@s"> <!--Сделай это радиобаттоном-->
             <input class="uk-input" formControlName="isDeleted" placeholder="Архивный или нет" type="password"/>
           </div>
-
-          <div class="uk-align-center">
-            <img class="uk-align-right rounded" alt="userphoto" height="90%" src="https://pp.userapi.com/WGcYjEGLQGBBXsD2ovJ8a8U_DfYes3R0q1ZSyA/g7qR_LaRmy4.jpg" width="30%">
-          </div>
           <div>
-            <button class="uk-button uk-margin-large-top uk-text-center button-continue uk-align-left" onclick="UIkit.notification({
+            <button class="uk-button uk-margin-large-top uk-text-center button-continue uk-align-left"
+                    onclick="UIkit.notification({
                                     message: '<span uk-icon=\'icon: check\'></span> Успешно сохранено!',
                                     status: 'primary',
                                     pos: 'bottom-right',
