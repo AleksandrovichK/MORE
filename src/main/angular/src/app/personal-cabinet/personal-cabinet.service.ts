@@ -13,8 +13,8 @@ export class PersonalCabinetService {
     return this.dataClientService.get('/users/' + UserID);
   }
 
-  saveUser(user: Observable<User>) {
-    this.dataClientService.put('/users/', user);
+  saveUser(user: Observable<User>): Observable<User> {
+    this.dataClientService.post('/users/', user);
   }
 }
 

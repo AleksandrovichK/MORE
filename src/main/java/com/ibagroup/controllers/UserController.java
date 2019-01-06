@@ -1,12 +1,12 @@
 package com.ibagroup.controllers;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Optional;
 
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,25 +28,23 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Response findById(@PathVariable("id") Long id) {
-        /* Optional<User> result = Optional.of(new User(id, "Евгений Дубинцов", "shurup@tut.by", "qwerty12345", new Date(), new BigDecimal(100.8), (short) 13, false)); */
-        // 1. не забывай обернуть свой ответ в RestResponse
-        // 2. не забывай, что ты возвращаешь Response.ok(...).build() а не объект какой-то
-        // 3. ВСЕ методы в контроллере, кроме void должны возвращать Response
-        // 4. а соответственно строка с return это всегда Response.ok( new RestResponse ( RESULT)).build() чтобы правильно сбилдить ответ
-        return Response.ok(new RestResponse(service.findById(id))).build();
+    public ResponseEntity findById(@PathVariable("id") Long id) {
+        Optional<User> result = service.findById(id);
 
+        return result
+                .map(user -> new ResponseEntity<>(new RestResponse(user), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new RestResponse(), HttpStatus.NOT_FOUND));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/") // Зачем тут было /add? В REST сервисах в путях строго запрещено использовать глаголы
-    public String save(@RequestBody User user) {
-        service.save(user);
-        return "Saved";
-    }
-	
-    @RequestMapping(method = RequestMethod.POST, value = "/") // Тот же что сверху? Оставь только один какой-то. Нам столько не надо. Его можно использовать и для создания и для обновления юзера. Значит вполне пойдёт единый POST запрос. Без глаголов в пути.
-    public Long createUser(@RequestBody User user) {
-        return service.save(user);
+    @RequestMapping(method = RequestMethod.POST, value = "/")
+    public ResponseEntity save(@RequestBody User user) {
+        Long result = service.save(user);
+
+        if (result != null) {
+            return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
