@@ -7,11 +7,11 @@ import {PersonalCabinetRouting} from './personal-cabinet.routing';
 import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {CalendarModule} from 'primeng/calendar';
-import {CabComponent} from "./cab/cab.component";
+import {CabComponent} from './cab/cab.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PersonalCabinetService} from './personal-cabinet.service';
-
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
   imports: [
@@ -23,6 +23,7 @@ import {PersonalCabinetService} from './personal-cabinet.service';
     FormsModule,
     ReactiveFormsModule,
     CheckboxModule,
+    RadioButtonModule,
     SelectButtonModule
   ],
   declarations: [LoginComponent, RegistrationComponent, CabComponent],
