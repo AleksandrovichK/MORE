@@ -44,6 +44,7 @@ export class CabComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.userForm.getRawValue())
     this.service.saveUser(this.userForm.getRawValue());
     /*this.router.navigate(['']);*/
   }
