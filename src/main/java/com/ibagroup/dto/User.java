@@ -19,8 +19,8 @@ import javax.persistence.TemporalType;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO  )
-    @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
     @Column(name = "USERNAME", length = 256, nullable = false)
     private String username;
