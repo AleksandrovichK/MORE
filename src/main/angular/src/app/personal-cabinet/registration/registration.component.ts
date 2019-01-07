@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PasswordModule} from 'primeng/password';
+import {PersonalCabinetService} from "../personal-cabinet.service";
 
 @Component({
   selector: 'app-login',
@@ -10,16 +11,18 @@ import {PasswordModule} from 'primeng/password';
 export class RegistrationComponent implements OnInit {
 
   registrationForm: FormGroup = this.builder.group({
-      login: [null],
-      password: [null],
-      email: [null],
-      name: [null],
-      home: [null],
-      birthday: [null]
+    id: [],
+    username: [''],
+    password: [''],
+    email: [''],
+    balance: [''],
+    registrationDate: [new Date()],
+    userTypeId: [''],
+    isDeleted: [null]
     }
   );
 
-  constructor(private builder: FormBuilder, private router: Router) {
+  constructor(private builder: FormBuilder, private router: Router, private service: PersonalCabinetService) {
 
   }
 
@@ -27,6 +30,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['']);
+    console.log(this.registrationForm.getRawValue());
+    this.service
+      .saveUser(this.registrationForm.getRawValue())
+      .subscribe(res => console.log('Object\'s ID:', res));
   }
 }

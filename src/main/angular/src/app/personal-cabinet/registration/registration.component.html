@@ -4,28 +4,55 @@
     <p>Заполните регистрационную форму</p>
 
     <div class="uk-margin-top">
-      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
         <div class="uk-grid-small" uk-grid>
-          <div class="uk-width-1-2@s">
-            <input class="uk-input" formControlName="login" type="text" placeholder="Логин"/>
-          </div>
-          <div class="uk-width-1-2@s">
-            <input class="uk-input" formControlName="password" type="password" placeholder="Пароль"/>
-          </div>
-          <div class="uk-width-1-1">
-            <input class="uk-input" formControlName="name" type="text" placeholder="Имя и фамилия"/>
-          </div>
-          <div class="uk-width-1-3@s">
-            <input class="uk-input" formControlName="email" type="email" placeholder="E-mail"/>
-          </div>
-          <div class="uk-width-1-3@s">
-            <input class="uk-input" formControlName="home" type="text" placeholder="Место жительства"/>
-          </div>
-          <div class="uk-width-1-3@s">
-            <p-calendar formControlName="birthday" placeholder="Дата рождения"></p-calendar>
+
+
+
+
+
+            <div class="uk-text-left uk-margin-small-top uk-width-1-2">
+              <span class="uk-text-meta ">E-mail</span>
+              <input class="uk-input" formControlName="email" placeholder="..." type="email"/>
+            </div>
+
+            <div class="uk-text-left uk-margin-small-top uk-width-1-2">
+              <span class="uk-text-meta">Пароль</span>
+              <input class="uk-input" formControlName="password" placeholder="..." type="password"/>
+            </div>
+            <div class="uk-text-left uk-width-1-1">
+              <span class="uk-text-meta"> Имя и фамилия</span>
+              <input class="uk-input" formControlName="username" placeholder="..." type="text"/>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="uk-text-left">
+              <span class="uk-text-meta">Дата регистрации</span>
+              <p-calendar dateFormat="dd/mm/yy" formControlName="registrationDate"></p-calendar>
+            </div>
+
+
+          <div class="uk-width-1-1@s">
+            <div class="uk-align-center uk-margin-medium-top">
+              <button class="uk-button button-blue"
+                      onclick="UIkit.notification({
+                                    message: '<span uk-icon=\'icon: check\'></span> Успешно сохранено!',
+                                    status: 'primary',
+                                    pos: 'bottom-right',
+                                    timeout: 1000
+                                    })"
+                      type="submit">Сохранить изменения
+              </button>
+            </div>
           </div>
         </div>
-        <button class="uk-button uk-margin-large-top uk-text-center button-blue" [routerLink]="''">Зарегистрироваться</button>
       </form>
     </div>
   </div>
