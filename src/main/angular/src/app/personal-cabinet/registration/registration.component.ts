@@ -15,7 +15,7 @@ export class RegistrationComponent implements OnInit {
     username: [''],
     password: [''],
     email: [''],
-    balance: [''],
+    balance: ['0'],
     registrationDate: [new Date()],
     userTypeId: [''],
     isDeleted: [null]
