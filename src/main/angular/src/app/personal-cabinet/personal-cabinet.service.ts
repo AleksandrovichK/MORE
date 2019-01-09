@@ -16,5 +16,8 @@ export class PersonalCabinetService {
   saveUser(user): Observable<User> {
     return this.dataClientService.post('/users/', user);
   }
+  checkEmail(user):Observable<String>{
+    return this.dataClientService.get('/users/check',user);
+  }
 }
 
