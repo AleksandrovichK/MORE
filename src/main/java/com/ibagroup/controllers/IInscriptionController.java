@@ -46,7 +46,7 @@ public class IInscriptionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/properties")
-    public RestResponse getAllUsers() {
+    public RestResponse getAllInscriptions() {
         return new RestResponse(service.findAll());
     }
 

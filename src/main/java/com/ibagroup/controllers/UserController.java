@@ -52,5 +52,15 @@ public class UserController {
         service.deleteById(id);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/check")
+    public ResponseEntity getUsers(@RequestBody User user) {
+        return new ResponseEntity<>(new RestResponse(checkEmail(user.getEmail())),HttpStatus.OK);
+    }
 
+    boolean checkEmail(String email){
+        for(User user:this.service.findAll()){
+            if(user.getEmail().equals(email))return true;
+        }
+        return false;
+    }
 }
