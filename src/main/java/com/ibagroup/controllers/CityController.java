@@ -1,5 +1,6 @@
 package com.ibagroup.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibagroup.dto.City;
@@ -20,7 +22,7 @@ import com.ibagroup.services.ICityService;
 @RestController
 @RequestMapping("/cities")
 public class CityController {
-   /* private final ICityService service;
+    private final ICityService service;
 
     private CityController(ICityService icity) {
         this.service = icity;
@@ -49,5 +51,16 @@ public class CityController {
     public String addNewUser(@RequestBody City city) {
         service.save(city);
         return "Saved";
-    }*/
+    }
+    @RequestMapping(method = RequestMethod.GET, value="/id")
+    public RestResponse getIdByCity(@RequestParam String city) {
+        List<City> cities = this.service.findAll();
+        for (City s : cities) {
+            if (s.getFrom_city().equals(city)) {
+                return new RestResponse(s.getId());
+
+            }
+        }
+        return null;
+    }
 }
