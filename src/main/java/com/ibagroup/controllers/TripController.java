@@ -32,13 +32,19 @@ public class TripController {
         Optional<Trip> result = service.findById(id);
 
         return result
-                .map(user -> new ResponseEntity<>(new RestResponse(user), HttpStatus.OK))
+                .map(Trip -> new ResponseEntity<>(new RestResponse(Trip), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(new RestResponse(), HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public Long save(@RequestBody Trip trip) {
-        return service.save(trip);
+    public ResponseEntity save(@RequestBody Trip Trip) {
+        Long result = service.save(Trip);
+
+        if (result != null) {
+            return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -46,21 +52,15 @@ public class TripController {
         service.deleteById(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add")
-    public String addNewUser(@RequestBody Trip trip) {
-        service.save(trip);
-        return "Saved";
-    }
     @RequestMapping(method = RequestMethod.GET, value = "/tr")
     public RestResponse findById(@RequestParam Long p1, @RequestParam Long p2) {
-            List<Trip> trips = this.service.findAll();
-            for (Trip t:trips)
-            {
-                if(t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)){}
-                else{
-                    trips.remove(t);
-                }
+        List<Trip> trips = this.service.findAll();
+        for (Trip t : trips) {
+            if (t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)) {
+            } else {
+                trips.remove(t);
             }
+        }
         return new RestResponse(trips);
     }
 

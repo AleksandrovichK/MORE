@@ -55,7 +55,7 @@ public class UserController {
         return new ResponseEntity<>(new RestResponse(checkEmail(user.getEmail())), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/checkpassword")
+    @RequestMapping(method = RequestMethod.POST, value = "/auth")
     public ResponseEntity checkUsers(@RequestBody User user) {
         return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(), user.getPassword())), HttpStatus.OK);
     }

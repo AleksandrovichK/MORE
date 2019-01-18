@@ -35,13 +35,19 @@ public class CityController {
         Optional<City> result = service.findById(id);
 
         return result
-                .map(user -> new ResponseEntity<>(new RestResponse(user), HttpStatus.OK))
+                .map(City -> new ResponseEntity<>(new RestResponse(City), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(new RestResponse(), HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public Long save(@RequestBody City city) {
-        return service.save(city);
+    public ResponseEntity save(@RequestBody City City) {
+        Long result = service.save(City);
+
+        if (result != null) {
+            return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -49,20 +55,15 @@ public class CityController {
         service.deleteById(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add")
-    public String addNewUser(@RequestBody City city) {
-        service.save(city);
-        return "Saved";
-    }
-    @RequestMapping(method = RequestMethod.GET, value="/id")
-    public RestResponse getIdByCity(@RequestParam String city) {
+    @RequestMapping(method = RequestMethod.GET, value = "/id")
+    public ResponseEntity getIdByCity(@RequestParam String city) {
         List<City> cities = this.service.findAll();
         for (City s : cities) {
             if (s.getCityFrom().equals(city)) {
-                return new RestResponse(s.getId());
+                return new ResponseEntity<>(s.getId(), HttpStatus.OK);
 
             }
         }
-        return null;
+        return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
     }
 }

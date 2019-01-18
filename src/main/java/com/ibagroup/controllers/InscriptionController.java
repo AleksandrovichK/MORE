@@ -4,16 +4,16 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ibagroup.dto.Inscription;
 import com.ibagroup.dto.RestResponse;
+import com.ibagroup.dto.Inscription;
 import com.ibagroup.services.IInscriptionService;
 
 /**
@@ -29,25 +29,29 @@ public class InscriptionController {
         this.service = injected;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/add")
-    public String addNewUser(@RequestBody Inscription inscription) {
-        service.save(inscription);
-        return "Saved";
-    }
-
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Optional<Inscription> findById(@PathVariable("id") Long id) {
-        return service.findById(id);
+    public ResponseEntity findById(@PathVariable("id") Long id) {
+        Optional<Inscription> result = service.findById(id);
+
+        return result
+                .map(Inscription -> new ResponseEntity<>(new RestResponse(Inscription), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new RestResponse(), HttpStatus.NOT_FOUND));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/delete")
-    public void delete(@RequestParam Long id) {
+    @RequestMapping(method = RequestMethod.POST, value = "/")
+    public ResponseEntity save(@RequestBody Inscription inscription) {
+        Long result = service.save(inscription);
+
+        if (result != null) {
+            return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void delete(@PathVariable("id") Long id) {
         service.deleteById(id);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/properties")
-    public RestResponse getAllInscriptions() {
-        return new RestResponse(service.findAll());
     }
 
 }
