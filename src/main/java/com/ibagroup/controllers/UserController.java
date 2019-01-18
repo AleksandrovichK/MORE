@@ -56,10 +56,20 @@ public class UserController {
     public ResponseEntity getUsers(@RequestBody User user) {
         return new ResponseEntity<>(new RestResponse(checkEmail(user.getEmail())),HttpStatus.OK);
     }
+    @RequestMapping(method = RequestMethod.POST, value = "/checkpassword")
+    public ResponseEntity checkUsers(@RequestBody User user) {
+        return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(),user.getPassword())),HttpStatus.OK);
+    }
 
     boolean checkEmail(String email){
         for(User user:this.service.findAll()){
             if(user.getEmail().equals(email))return true;
+        }
+        return false;
+    }
+    boolean checkUser(String email, String password){
+        for(User user:this.service.findAll()){
+            if(user.getEmail().equals(email)&&user.getPassword().equals(password))return true;
         }
         return false;
     }

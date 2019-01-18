@@ -1,5 +1,6 @@
 package com.ibagroup.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -33,5 +34,10 @@ public class TripService implements ITripService {
 
     public void deleteById(Long id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public List<Trip> findAll() {
+        return dao.findAll();
     }
 }

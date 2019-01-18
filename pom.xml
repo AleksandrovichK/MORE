@@ -64,7 +64,11 @@
             <version>3.5.1.Final</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>5.0.0.Final</version>
+        </dependency>
       <!--  &lt;!&ndash; https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api &ndash;&gt;
         <dependency>
             <groupId>javax.ws.rs</groupId>
