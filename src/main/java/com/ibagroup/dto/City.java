@@ -20,10 +20,10 @@ public class City {
     @Column(name = "ID", nullable = false)
     private Long id;
     @Column(name = "CITY", length = 20, nullable = false)
-    private String from_city;
+    private String cityFrom;
 
-    public City(String from_city) {
-        this.from_city = from_city;
+    public City(String cityFrom) {
+        this.cityFrom = cityFrom;
     }
     public  City(){}
 
@@ -35,19 +35,19 @@ public class City {
         this.id = id;
     }
 
-    public String getFrom_city() {
-        return from_city;
+    public String getCityFrom() {
+        return cityFrom;
     }
 
-    public void setFrom_city(String from_city) {
-        this.from_city = from_city;
+    public void setCityFrom(String cityFrom) {
+        this.cityFrom = cityFrom;
     }
 
     @Override
     public String toString() {
         return "City{" +
                 "id=" + id +
-                ", from_city='" + from_city + '\'' +
+                ", cityFrom='" + cityFrom + '\'' +
                 '}';
     }
 }

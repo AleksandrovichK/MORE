@@ -25,18 +25,23 @@ public class CityService implements ICityService {
         this.dao = dao;
     }
 
+
+    @Override
     public Optional<City> findById(Long id) {
         return dao.findById(id);
     }
 
+    @Override
     public Long save(City newCity) {
         return dao.save(newCity).getId();
     }
 
+    @Override
     public void deleteById(Long id) {
         dao.deleteById(id);
     }
 
+    @Override
     public List<City> findAll() {
         return dao.findAll();
     }

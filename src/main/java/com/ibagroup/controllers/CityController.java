@@ -3,6 +3,7 @@ package com.ibagroup.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +25,9 @@ import com.ibagroup.services.ICityService;
 public class CityController {
     private final ICityService service;
 
-    private CityController(ICityService icity) {
-        this.service = icity;
+    @Autowired
+    private CityController(ICityService city) {
+        this.service = city;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -56,7 +58,7 @@ public class CityController {
     public RestResponse getIdByCity(@RequestParam String city) {
         List<City> cities = this.service.findAll();
         for (City s : cities) {
-            if (s.getFrom_city().equals(city)) {
+            if (s.getCityFrom().equals(city)) {
                 return new RestResponse(s.getId());
 
             }

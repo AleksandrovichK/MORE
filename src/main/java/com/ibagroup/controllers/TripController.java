@@ -3,8 +3,7 @@ package com.ibagroup.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import javax.ws.rs.core.Response;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +22,9 @@ import com.ibagroup.services.ITripService;
 public class TripController {
     private final ITripService service;
 
-    private TripController(ITripService itrip) {
-        this.service = itrip;
+    @Autowired
+    private TripController(ITripService trip) {
+        this.service = trip;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -56,9 +56,9 @@ public class TripController {
             List<Trip> trips = this.service.findAll();
             for (Trip t:trips)
             {
-                if(t.getFrom_city() == p1&&t.getTo_city()==p2){}
+                if(t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)){}
                 else{
-                    trips.remove(trips.indexOf(t));
+                    trips.remove(t);
                 }
             }
         return new RestResponse(trips);

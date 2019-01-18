@@ -15,5 +15,5 @@ public interface IInscriptionService {
 
     void deleteById(Long id);
 
-    public List<Inscription> findAll();
+    List<Inscription> findAll();
 }

@@ -15,5 +15,5 @@ public interface ICityService {
 
     void deleteById(Long id);
 
-    public List<City> findAll();
+    List<City> findAll();
 }

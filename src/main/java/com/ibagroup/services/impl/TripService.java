@@ -24,14 +24,18 @@ public class TripService implements ITripService {
         this.dao = dao;
     }
 
+
+    @Override
     public Optional<Trip> findById(Long id) {
         return dao.findById(id);
     }
 
+    @Override
     public Long save(Trip newTrip) {
         return dao.save(newTrip).getId();
     }
 
+    @Override
     public void deleteById(Long id) {
         dao.deleteById(id);
     }

@@ -18,28 +18,28 @@ public class Trip {
     @Column(name = "ID", nullable = false)
     private Long id;
     @Column(name = "FRM", length = 20, nullable = false)
-    private Long from_city;
+    private Long cityFrom;
     @Column(name = "TO_CITY", length = 20, nullable = false)
-    private Long to_city;
+    private Long cityTo;
     @Column(name = "COST")
     private Integer cost;
     @Column(name = "TRANSPORT", length = 20)
     private String transport;
     @Column(name = "START_TIME")
-    private String starttime;
+    private String startTime;
     @Column(name = "END_TIME")
-    private String endtime;
+    private String endTime;
 
     public Trip() {
     }
 
-    public Trip(Long from_city, Long to_city, Integer cost, String transport, String starttime, String endtime) {
-        this.from_city = from_city;
-        this.to_city = to_city;
+    public Trip(Long cityFrom, Long cityTo, Integer cost, String transport, String startTime, String endTime) {
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
         this.cost = cost;
         this.transport = transport;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Long getId() {
@@ -50,20 +50,20 @@ public class Trip {
         this.id = id;
     }
 
-    public Long getFrom_city() {
-        return from_city;
+    public Long getCityFrom() {
+        return cityFrom;
     }
 
-    public void setFrom_city(Long from_city) {
-        this.from_city = from_city;
+    public void setCityFrom(Long cityFrom) {
+        this.cityFrom = cityFrom;
     }
 
-    public Long getTo_city() {
-        return to_city;
+    public Long getCityTo() {
+        return cityTo;
     }
 
-    public void setTo_city(Long to_city) {
-        this.to_city = to_city;
+    public void setCityTo(Long cityTo) {
+        this.cityTo = cityTo;
     }
 
     public Integer getCost() {
@@ -82,32 +82,32 @@ public class Trip {
         this.transport = transport;
     }
 
-    public String getStarttime() {
-        return starttime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(String starttime) {
-        this.starttime = starttime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEndtime() {
-        return endtime;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(String endtime) {
-        this.endtime = endtime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     @Override
     public String toString() {
         return "Trip{" +
                 "id=" + id +
-                ", from_city='" + from_city + '\'' +
-                ", to_city='" + to_city + '\'' +
+                ", cityFrom='" + cityFrom + '\'' +
+                ", cityTo='" + cityTo + '\'' +
                 ", cost=" + cost +
                 ", balance=" + transport +
-                ", starttime=" + starttime +
-                ", endtime=" + endtime +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 '}';
     }
 }

@@ -21,11 +21,11 @@ import com.ibagroup.services.IInscriptionService;
  */
 @RestController
 @RequestMapping("/ins")
-public class IInscriptionController {
+public class InscriptionController {
     private final IInscriptionService service;
 
     @Autowired
-    private IInscriptionController(IInscriptionService injected) {
+    private InscriptionController(IInscriptionService injected) {
         this.service = injected;
     }
 

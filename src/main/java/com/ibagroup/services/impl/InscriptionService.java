@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ibagroup.dao.IInscriptionDao;
-import com.ibagroup.dao.IUserDao;
 import com.ibagroup.dto.Inscription;
-import com.ibagroup.dto.User;
 import com.ibagroup.services.IInscriptionService;
 
 /**
@@ -27,18 +25,23 @@ public class InscriptionService implements IInscriptionService {
         this.dao = dao;
     }
 
+
+    @Override
     public Optional<Inscription> findById(Long id) {
         return dao.findById(id);
     }
 
+    @Override
     public Long save(Inscription newInscription) {
         return dao.save(newInscription).getId();
     }
 
+    @Override
     public void deleteById(Long id) {
         dao.deleteById(id);
     }
 
+    @Override
     public List<Inscription> findAll() {
         return dao.findAll();
     }

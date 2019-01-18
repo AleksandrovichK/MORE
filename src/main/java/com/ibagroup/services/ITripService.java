@@ -15,5 +15,5 @@ public interface ITripService {
 
     void deleteById(Long id);
 
-    public List<Trip>findAll();
+    List<Trip>findAll();
 }

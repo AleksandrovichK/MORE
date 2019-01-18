@@ -2,8 +2,6 @@ package com.ibagroup.controllers;
 
 import java.util.Optional;
 
-import javax.ws.rs.core.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +21,8 @@ public class UserController {
     private final IUserService service;
 
     @Autowired
-    private UserController(IUserService injected) {
-        this.service = injected;
+    private UserController(IUserService userService) {
+        this.service = userService;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -54,22 +52,26 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/check")
     public ResponseEntity getUsers(@RequestBody User user) {
-        return new ResponseEntity<>(new RestResponse(checkEmail(user.getEmail())),HttpStatus.OK);
-    }
-    @RequestMapping(method = RequestMethod.POST, value = "/checkpassword")
-    public ResponseEntity checkUsers(@RequestBody User user) {
-        return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(),user.getPassword())),HttpStatus.OK);
+        return new ResponseEntity<>(new RestResponse(checkEmail(user.getEmail())), HttpStatus.OK);
     }
 
-    boolean checkEmail(String email){
-        for(User user:this.service.findAll()){
-            if(user.getEmail().equals(email))return true;
+    @RequestMapping(method = RequestMethod.POST, value = "/checkpassword")
+    public ResponseEntity checkUsers(@RequestBody User user) {
+        return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(), user.getPassword())), HttpStatus.OK);
+    }
+
+    private boolean checkEmail(String email) {
+        for (User user : this.service.findAll()) {
+            if (user.getEmail().equals(email))
+                return true;
         }
         return false;
     }
-    boolean checkUser(String email, String password){
-        for(User user:this.service.findAll()){
-            if(user.getEmail().equals(email)&&user.getPassword().equals(password))return true;
+
+    private boolean checkUser(String email, String password) {
+        for (User user : this.service.findAll()) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password))
+                return true;
         }
         return false;
     }
