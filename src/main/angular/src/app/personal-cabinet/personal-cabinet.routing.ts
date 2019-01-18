@@ -14,7 +14,7 @@ export const routes: Routes = [
       component: RegistrationComponent
     },
     {
-      path: 'cab',
+      path: 'login/registration/cab',
       component: CabComponent
     }
 

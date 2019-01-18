@@ -12,6 +12,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PersonalCabinetService} from './personal-cabinet.service';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({

@@ -19,5 +19,8 @@ export class PersonalCabinetService {
   checkEmail(user):Observable<boolean>{
     return this.dataClientService.post('/users/check',user);
   }
+  checkPassword(user):Observable<boolean>{
+    return this.dataClientService.post('/users/checkpassword',user);
+  }
 }
 

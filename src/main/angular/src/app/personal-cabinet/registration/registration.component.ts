@@ -43,6 +43,7 @@ export class RegistrationComponent implements OnInit {
       this.service
         .saveUser(this.registrationForm.getRawValue())
         .subscribe(res => console.log('Object\'s ID:', res));
+      this.router.navigate(['login/registration/cab']);
     }
 
   }
