@@ -1,6 +1,5 @@
 package com.ibagroup.algorithms;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import com.ibagroup.dto.Trip;
 /**
  * @author DubininaE
  */
-public class FindByTransport implements IAlgorythmRealisation{
+public class FindByTransport implements IAlgorithmRealisation {
     private ITripDao dao;
     private Long p1;
     private Long p2;
@@ -24,19 +23,15 @@ public class FindByTransport implements IAlgorythmRealisation{
     }
 
     @Override
-    public List<Trip> algo() {
-        List<Trip>trips = dao.findAll();
+    public List<Trip> algorithm() {
+        List<Trip> trips = dao.findAll();
         for (Trip t : trips) {
-            if (t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)&&t.getTransport().equals(transport)) {
+            if (t.getCityFrom().equals(p1) && t.getCityTo().equals(p2) && t.getTransport().equals(transport)) {
             } else {
                 trips.remove(t);
             }
         }
-        Collections.sort(trips, new Comparator<Trip>() {
-            public int compare(Trip o1, Trip o2) {
-                return o1.getCost().compareTo(o2.getCost());
-            }
-        });
+        trips.sort(Comparator.comparing(Trip::getCost));
         return trips;
     }
 }

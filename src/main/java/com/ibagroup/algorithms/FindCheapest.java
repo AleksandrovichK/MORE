@@ -10,7 +10,7 @@ import com.ibagroup.dto.Trip;
 /**
  * @author DubininaE
  */
-public class FindCheapest implements IAlgorythmRealisation{
+public class FindCheapest implements IAlgorithmRealisation {
     private ITripDao dao;
     private Long p1;
     private Long p2;
@@ -22,7 +22,7 @@ public class FindCheapest implements IAlgorythmRealisation{
     }
 
     @Override
-    public List<Trip> algo() {
+    public List<Trip> algorithm() {
         List<Trip>trips = dao.findAll();
         for (Trip t : trips) {
             if (t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)) {

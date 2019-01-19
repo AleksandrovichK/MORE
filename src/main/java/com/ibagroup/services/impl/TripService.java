@@ -49,10 +49,10 @@ public class TripService implements ITripService {
 
     @Override
     public List<Trip> findCheapest(Long id1, Long id2) {
-        return new FindCheapest(dao, id1, id2).algo();
+        return new FindCheapest(dao, id1, id2).algorithm();
     }
     @Override
     public List<Trip> findByTransport(Long id1, Long id2, String transport) {
-        return new FindByTransport(dao, id1, id2, transport).algo();
+        return new FindByTransport(dao, id1, id2, transport).algorithm();
     }
 }
