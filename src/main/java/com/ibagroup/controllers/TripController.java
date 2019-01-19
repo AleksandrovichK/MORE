@@ -63,5 +63,13 @@ public class TripController {
         }
         return new RestResponse(trips);
     }
+    @RequestMapping(method = RequestMethod.GET, value = "/cheaporder")
+    public RestResponse findCheapestById(@RequestParam Long p1, @RequestParam Long p2) {
+        return new RestResponse(this.service.findCheapest(p1, p2));
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/transport")
+    public RestResponse findCheapestByTransport(@RequestParam Long p1, @RequestParam Long p2,@RequestParam String transport) {
+        return new RestResponse(this.service.findByTransport(p1, p2, transport));
+    }
 
 }

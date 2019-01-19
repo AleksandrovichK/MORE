@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ibagroup.algorithms.FindByTransport;
+import com.ibagroup.algorithms.FindCheapest;
 import com.ibagroup.dao.ITripDao;
 import com.ibagroup.dto.Trip;
 import com.ibagroup.services.ITripService;
@@ -43,5 +45,14 @@ public class TripService implements ITripService {
     @Override
     public List<Trip> findAll() {
         return dao.findAll();
+    }
+
+    @Override
+    public List<Trip> findCheapest(Long id1, Long id2) {
+        return new FindCheapest(dao, id1, id2).algo();
+    }
+    @Override
+    public List<Trip> findByTransport(Long id1, Long id2, String transport) {
+        return new FindByTransport(dao, id1, id2, transport).algo();
     }
 }

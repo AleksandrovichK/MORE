@@ -15,5 +15,9 @@ public interface ITripService {
 
     void deleteById(Long id);
 
-    List<Trip>findAll();
+    List<Trip> findAll();
+
+    List<Trip> findCheapest(Long id1, Long id2);
+
+    List<Trip> findByTransport(Long id1, Long id2, String transport);
 }
