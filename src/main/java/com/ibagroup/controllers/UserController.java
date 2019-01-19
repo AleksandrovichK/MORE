@@ -60,6 +60,10 @@ public class UserController {
         return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(), user.getPassword())), HttpStatus.OK);
     }
 
+    /**
+     * А вот эти два затерявшихся в контроллере метода, явно относящиеся к логике
+     * нужно убрать в бин. Можно в IUserService, можно написать и новый чисто под аутентификацию.
+     * */
     private boolean checkEmail(String email) {
         for (User user : this.service.findAll()) {
             if (user.getEmail().equals(email))

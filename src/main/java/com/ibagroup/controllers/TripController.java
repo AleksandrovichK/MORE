@@ -57,18 +57,23 @@ public class TripController {
         List<Trip> trips = this.service.findAll();
         for (Trip t : trips) {
             if (t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)) {
+                /**
+                 * Пустой if? Зачем? :)
+                 * */
             } else {
                 trips.remove(t);
             }
         }
         return new RestResponse(trips);
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/cheaporder")
+
+    @RequestMapping(method = RequestMethod.GET, value = "/cheap-order")
     public RestResponse findCheapestById(@RequestParam Long p1, @RequestParam Long p2) {
         return new RestResponse(this.service.findCheapest(p1, p2));
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/transport")
-    public RestResponse findCheapestByTransport(@RequestParam Long p1, @RequestParam Long p2,@RequestParam String transport) {
+    public RestResponse findCheapestByTransport(@RequestParam Long p1, @RequestParam Long p2, @RequestParam String transport) {
         return new RestResponse(this.service.findByTransport(p1, p2, transport));
     }
 
