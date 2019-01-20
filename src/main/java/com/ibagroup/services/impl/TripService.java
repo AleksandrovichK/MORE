@@ -1,5 +1,6 @@
 package com.ibagroup.services.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,11 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ibagroup.algorithms.FindByTransport;
-import com.ibagroup.algorithms.FindCheapest;
 import com.ibagroup.dao.ITripDao;
 import com.ibagroup.dto.Trip;
 import com.ibagroup.services.ITripService;
+
 /**
  * @author DubininaE
  */
@@ -25,7 +25,6 @@ public class TripService implements ITripService {
     public TripService(ITripDao dao) {
         this.dao = dao;
     }
-
 
     @Override
     public Optional<Trip> findById(Long id) {
@@ -49,10 +48,25 @@ public class TripService implements ITripService {
 
     @Override
     public List<Trip> findCheapest(Long id1, Long id2) {
-        return new FindCheapest(dao, id1, id2).algorithm();
+        List<Trip> trips = dao.findAll();
+        for (Trip trip : trips) {
+            if (!(trip.getCityFrom().equals(id1) && trip.getCityTo().equals(id2))) {
+                trips.remove(trip);
+            }
+        }
+        trips.sort(Comparator.comparing(Trip::getCost));
+        return trips;
     }
+
     @Override
     public List<Trip> findByTransport(Long id1, Long id2, String transport) {
-        return new FindByTransport(dao, id1, id2, transport).algorithm();
+        List<Trip> trips = dao.findAll();
+        for (Trip trip : trips) {
+            if (!(trip.getCityFrom().equals(id1) && trip.getCityTo().equals(id2) && trip.getTransport().equals(transport))) {
+                trips.remove(trip);
+            }
+        }
+        trips.sort(Comparator.comparing(Trip::getCost));
+        return trips;
     }
 }

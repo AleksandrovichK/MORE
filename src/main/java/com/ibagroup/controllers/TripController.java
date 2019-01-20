@@ -1,6 +1,5 @@
 package com.ibagroup.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,21 +49,6 @@ public class TripController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") Long id) {
         service.deleteById(id);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/tr")
-    public RestResponse findById(@RequestParam Long p1, @RequestParam Long p2) {
-        List<Trip> trips = this.service.findAll();
-        for (Trip t : trips) {
-            if (t.getCityFrom().equals(p1) && t.getCityTo().equals(p2)) {
-                /**
-                 * Пустой if? Зачем? :)
-                 * */
-            } else {
-                trips.remove(t);
-            }
-        }
-        return new RestResponse(trips);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/cheap-order")
