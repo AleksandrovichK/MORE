@@ -1,5 +1,6 @@
 package com.ibagroup.services;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +22,5 @@ public interface ITripService {
 
     List<Trip> findByTransport(Long id1, Long id2, String transport);
 
+    List<Trip> findByTime(Long id1, Long id2, Time strartTime, Time endTime);
 }

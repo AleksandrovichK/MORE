@@ -1,5 +1,6 @@
 package com.ibagroup.controllers;
 
+import java.sql.Time;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,14 @@ public class TripController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/transport")
-    public RestResponse findCheapestByTransport(@RequestParam Long p1, @RequestParam Long p2, @RequestParam String transport) {
-        return new RestResponse(this.service.findByTransport(p1, p2, transport));
+    public RestResponse findCheapestByTransport(@RequestParam Long id1,
+            @RequestParam Long id2, @RequestParam String transport) {
+        return new RestResponse(this.service.findByTransport(id1, id2, transport));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/time")
+    public RestResponse findCheapestByTime(@RequestParam Long id1, @RequestParam Long id2,
+            @RequestParam Time starttime, @RequestParam Time endtime) {
+        return new RestResponse(this.service.findByTime(id1, id2, starttime, endtime));
+    }
 }

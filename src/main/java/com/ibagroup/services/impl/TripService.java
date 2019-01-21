@@ -1,5 +1,6 @@
 package com.ibagroup.services.impl;
 
+import java.sql.Time;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -62,7 +63,25 @@ public class TripService implements ITripService {
     public List<Trip> findByTransport(Long id1, Long id2, String transport) {
         List<Trip> trips = dao.findAll();
         for (Trip trip : trips) {
-            if (!(trip.getCityFrom().equals(id1) && trip.getCityTo().equals(id2) && trip.getTransport().equals(transport))) {
+            if (!(trip.getCityFrom().equals(id1)
+                    && trip.getCityTo().equals(id2)
+                    && trip.getTransport().equals(transport))) {
+                trips.remove(trip);
+            }
+        }
+        trips.sort(Comparator.comparing(Trip::getCost));
+        return trips;
+    }
+
+    @Override
+    public List<Trip> findByTime(Long id1, Long id2, Time strartTime, Time endTime) {
+        List<Trip> trips = dao.findAll();
+        for (Trip trip : trips) {
+            if (!(trip.getCityFrom().equals(id1)
+                    && trip.getCityTo().equals(id2)
+                    && Time.valueOf(trip.getStartTime()).after(strartTime))
+                    && Time.valueOf(trip.getEndTime()).before(endTime)
+            ) {
                 trips.remove(trip);
             }
         }
