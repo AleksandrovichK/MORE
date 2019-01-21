@@ -12,7 +12,8 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PersonalCabinetService} from './personal-cabinet.service';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import {ToastModule} from "primeng/toast";
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 
 
 @NgModule({
@@ -26,13 +27,15 @@ import {ToastModule} from "primeng/toast";
     ReactiveFormsModule,
     CheckboxModule,
     RadioButtonModule,
-    SelectButtonModule
+    SelectButtonModule,
+    AutoCompleteModule
   ],
   declarations: [LoginComponent, RegistrationComponent, CabComponent],
   providers: [PersonalCabinetService]
 })
 export class PersonalCabinetModule {
 }
+
 
 
 

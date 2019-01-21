@@ -37,6 +37,10 @@
               <span class="uk-text-meta">Дата регистрации</span>
               <p-calendar dateFormat="dd/mm/yy" formControlName="registrationDate"></p-calendar>
             </div>
+          <div class="uk-text-left">
+            <span class="uk-text-meta">Город</span>
+            <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
+          </div>
 
 
           <div class="uk-width-1-1@s">
