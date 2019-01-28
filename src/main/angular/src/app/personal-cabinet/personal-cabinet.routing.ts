@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {CabComponent} from './cab/cab.component';
+import {AuthGuard} from "../core/auth.guard";
 
 export const routes: Routes = [
     {
@@ -15,9 +16,9 @@ export const routes: Routes = [
     },
     {
       path: 'login/registration/cab',
-      component: CabComponent
+      component: CabComponent,
+      canActivate: [AuthGuard]
     }
-
   ]
 ;
 

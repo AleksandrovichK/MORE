@@ -60,6 +60,18 @@ public class UserController {
         return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(), user.getPassword())), HttpStatus.OK);
     }
 
+ /*   @RequestMapping(value ="/cities")
+    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public List<String> getUser(){
+        return Arrays.asList("a","a","a","a","a");
+    }
+
+    @RequestMapping(value ="/users", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    public List<String> getUsers2(){
+        return Arrays.asList("user1","user2","user3","user4","user5");
+    }*/
+
     /**
      * А вот эти два затерявшихся в контроллере метода, явно относящиеся к логике
      * нужно убрать в бин. Можно в IUserService, можно написать и новый чисто под аутентификацию.
