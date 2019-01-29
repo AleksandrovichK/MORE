@@ -20,7 +20,7 @@ export class PersonalCabinetService {
     return this.dataClientService.post('/users/check',user);
   }
   checkPassword(user):Observable<boolean>{
-    return this.dataClientService.post('/users/auth',user);
+    return this.dataClientService.post('/users/sign-up',user);
   }
 }
 

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import javax.jws.soap.SOAPBinding;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
@@ -35,7 +36,6 @@ public class UserService implements UserDetailsService, IUserService {
         this.encoder = encoder;
     }
 
-
     @Override
     public void deleteById(Long id) {
         dao.deleteById(id);
@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService, IUserService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = dao.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
@@ -59,7 +59,6 @@ public class UserService implements UserDetailsService, IUserService {
         return list;
     }
 
-
     @Override
     public User findOne(String username) {
         return dao.findByUsername(username);
@@ -74,7 +73,7 @@ public class UserService implements UserDetailsService, IUserService {
     @Override
     public User update(User userData) {
         User user = findById(userData.getId());
-        if(user != null) {
+        if (user != null) {
             BeanUtils.copyProperties(userData, user, "password");
             dao.save(user);
         }
@@ -86,7 +85,27 @@ public class UserService implements UserDetailsService, IUserService {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(encoder.encode(user.getPassword()));
-       // TODO SET ALL FIELDS
+        // TODO SET ALL FIELDS
         return dao.save(newUser);
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        for (User user : dao.findAll()) {
+            if (user.getEmail().equals(email))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkUser(String email, String password) {
+        List<User>users = dao.findAll();
+        for (User user : dao.findAll()) {
+            if(user.getEmail()!= null)
+            if (user.getEmail().equals(email) && user.getPassword().equals(password))
+                return true;
+        }
+        return false;
     }
 }

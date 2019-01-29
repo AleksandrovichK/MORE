@@ -42,17 +42,16 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
 
-    this.service.checkEmail(this.registrationForm.getRawValue())
+   this.service.checkEmail(this.registrationForm.getRawValue())
       .subscribe(data => this.result = data);
     if (this.result === true) {
       console.log("User with this email already exists");
-    } else {
+    }/* else {
       this.service
         .saveUser(this.registrationForm.getRawValue())
         .subscribe(res => console.log('Object\'s ID:', res));
       this.router.navigate(['login/registration/cab']);
-    }
-
+    }*/
   }
 }
 

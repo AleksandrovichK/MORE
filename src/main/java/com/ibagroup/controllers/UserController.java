@@ -51,34 +51,14 @@ public class UserController {
     public void delete(@PathVariable("id") Long id) {
         service.deleteById(id);
     }
-/*
+
     @RequestMapping(method = RequestMethod.POST, value = "/check")
     public ResponseEntity getUsers(@RequestBody User user) {
-        return new ResponseEntity<>(new RestResponse(checkEmail(user.getEmail())), HttpStatus.OK);
+        return new ResponseEntity<>(new RestResponse(service.checkEmail(user.getEmail())), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/auth")
     public ResponseEntity checkUsers(@RequestBody User user) {
-        return new ResponseEntity<>(new RestResponse(checkUser(user.getEmail(), user.getPassword())), HttpStatus.OK);
-    }*/
-
-    /**
-     * А вот эти два затерявшихся в контроллере метода, явно относящиеся к логике
-     * нужно убрать в бин. Можно в IUserService, можно написать и новый чисто под аутентификацию.
-     * */
- /*   private boolean checkEmail(String email) {
-        for (User user : this.service.findAll()) {
-            if (user.getEmail().equals(email))
-                return true;
-        }
-        return false;
+        return new ResponseEntity<>(new RestResponse(service.checkUser(user.getEmail(), user.getPassword())), HttpStatus.OK);
     }
-
-    private boolean checkUser(String email, String password) {
-        for (User user : this.service.findAll()) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password))
-                return true;
-        }
-        return false;
-    }*/
 }

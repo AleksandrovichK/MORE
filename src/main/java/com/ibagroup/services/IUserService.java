@@ -23,4 +23,8 @@ public interface IUserService {
 
     @Deprecated
     User update(User userDto);
+
+    boolean checkEmail(String email);
+    boolean checkUser(String email, String passwors);
+
 }
