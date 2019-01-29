@@ -13,4 +13,5 @@ import com.ibagroup.dto.User;
  */
 @Repository
 public interface IUserDao extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 }

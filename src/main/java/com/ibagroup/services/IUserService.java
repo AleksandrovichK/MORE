@@ -1,21 +1,24 @@
 package com.ibagroup.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.validation.constraints.Max;
 
 import com.ibagroup.dto.User;
+import com.ibagroup.dto.UserDto;
 
 /**
  * @author AleksandrovichK
  */
-public interface IUserService {
-    Long save(User newUser);
 
-    Optional<User> findById(Long id);
+public interface IUserService {
+    List<User> findAll();
+
+    User findOne(String username);
+
+    User findById(Long id);
 
     void deleteById(Long id);
 
-    List<User> findAll();
+    User save(UserDto user);
+
+    UserDto update(UserDto userDto);
 }
