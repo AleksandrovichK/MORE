@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibagroup.dto.RestResponse;
 import com.ibagroup.dto.User;
-import com.ibagroup.dto.UserDto;
 import com.ibagroup.services.IUserService;
 
 @RestController
@@ -38,7 +37,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sign-up")
-    public ResponseEntity save(@RequestBody UserDto user) {
+    public ResponseEntity save(@RequestBody User user) {
         User result = service.save(user);
 
         if (result != null) {

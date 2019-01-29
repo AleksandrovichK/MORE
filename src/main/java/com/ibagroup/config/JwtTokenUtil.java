@@ -1,7 +1,7 @@
 package com.ibagroup.config;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.function.Function;
 
@@ -15,8 +15,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import static com.ibagroup.dto.Constants.ACCESS_TOKEN_VALIDITY_SECONDS;
-import static com.ibagroup.dto.Constants.SIGNING_KEY;
+import static com.ibagroup.config.Constants.ACCESS_TOKEN_VALIDITY_SECONDS;
+import static com.ibagroup.config.Constants.SIGNING_KEY;
 
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -53,11 +53,11 @@ public class JwtTokenUtil implements Serializable {
     private String doGenerateToken(String subject) {
 
         Claims claims = Jwts.claims().setSubject(subject);
-        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        claims.put("scopes", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuer("http://devglan.com")
+                .setIssuer("http://ibagroup.by")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)

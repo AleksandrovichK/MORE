@@ -1,7 +1,7 @@
 package com.ibagroup.services.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import com.ibagroup.dao.IUserDao;
 import com.ibagroup.dto.User;
-import com.ibagroup.dto.UserDto;
 import com.ibagroup.services.IUserService;
 
 /**
@@ -28,14 +27,14 @@ import com.ibagroup.services.IUserService;
 @Transactional
 public class UserService implements UserDetailsService, IUserService {
     private final IUserDao dao;
+    private final BCryptPasswordEncoder encoder;
 
     @Autowired
-    private BCryptPasswordEncoder bcryptEncoder;
-
-    @Autowired
-    public UserService(IUserDao dao) {
+    public UserService(IUserDao dao, BCryptPasswordEncoder encoder) {
         this.dao = dao;
+        this.encoder = encoder;
     }
+
 
     @Override
     public void deleteById(Long id) {
@@ -51,7 +50,7 @@ public class UserService implements UserDetailsService, IUserService {
     }
 
     private List<SimpleGrantedAuthority> getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     public List<User> findAll() {
@@ -69,25 +68,25 @@ public class UserService implements UserDetailsService, IUserService {
     @Override
     public User findById(Long id) {
         Optional<User> optionalUser = dao.findById(id);
-        return optionalUser.isPresent() ? optionalUser.get() : null;
+        return optionalUser.orElse(null);
     }
 
     @Override
-    public UserDto update(UserDto userDto) {
-        User user = findById(userDto.getId());
+    public User update(User userData) {
+        User user = findById(userData.getId());
         if(user != null) {
-            BeanUtils.copyProperties(userDto, user, "password");
+            BeanUtils.copyProperties(userData, user, "password");
             dao.save(user);
         }
-        return userDto;
+        return userData;
     }
 
     @Override
-    public User save(UserDto user) {
-        User newUserOld = new User();
-        newUserOld.setUsername(user.getUsername());
-        newUserOld.setPassword(bcryptEncoder.encode(user.getPassword()));
+    public User save(User user) {
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(encoder.encode(user.getPassword()));
        // TODO SET ALL FIELDS
-        return dao.save(newUserOld);
+        return dao.save(newUser);
     }
 }
