@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import javax.jws.soap.SOAPBinding;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
@@ -71,41 +70,18 @@ public class UserService implements UserDetailsService, IUserService {
     }
 
     @Override
-    public User update(User userData) {
+    public void update(User userData) {
         User user = findById(userData.getId());
         if (user != null) {
-            BeanUtils.copyProperties(userData, user, "password");
+            BeanUtils.copyProperties(userData, user, "username");
+            user.setPassword(encoder.encode(userData.getPassword()));
             dao.save(user);
         }
-        return userData;
     }
 
     @Override
-    public User save(User user) {
-        User newUser = new User();
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(encoder.encode(user.getPassword()));
-        // TODO SET ALL FIELDS
-        return dao.save(newUser);
-    }
-
-    @Override
-    public boolean checkEmail(String email) {
-        for (User user : dao.findAll()) {
-            if (user.getEmail().equals(email))
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkUser(String email, String password) {
-        List<User>users = dao.findAll();
-        for (User user : dao.findAll()) {
-            if(user.getEmail()!= null)
-            if (user.getEmail().equals(email) && user.getPassword().equals(password))
-                return true;
-        }
-        return false;
+    public User create(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return dao.save(user);
     }
 }

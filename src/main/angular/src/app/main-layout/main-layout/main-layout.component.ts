@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
-import { MainLayoutService } from '../main-layout.service';
+import {MainLayoutService} from '../main-layout.service';
+import {Router} from "@angular/router";
 
 declare const ymaps: any;
 
@@ -21,6 +22,7 @@ export class MainLayoutComponent implements OnInit {
   info: string;
   listFrom: string[] = [];
   listTo: string[] = [];
+  user: string = null;
 
   loadingFrom = false;
   loadingTo = false;
@@ -33,9 +35,15 @@ export class MainLayoutComponent implements OnInit {
   );
 
 
-  constructor(private service: MainLayoutService, private builder: FormBuilder) {}
+  constructor(private service: MainLayoutService, private builder: FormBuilder, private router: Router) {
+  }
 
   ngOnInit() {
+    if (localStorage.getItem('currentUser')) {
+      let userName = localStorage.getItem('currentUser');
+      userName = userName.replace(/"/g, "");
+      this.user = userName;
+    }
     ymaps.ready(this.initMap.bind(this));
   }
 
@@ -45,7 +53,7 @@ export class MainLayoutComponent implements OnInit {
     }
 
     this.loadingFrom = true;
-    const map = await ymaps.geocode(query, { results: 5 });
+    const map = await ymaps.geocode(query, {results: 5});
     this.loadingFrom = false;
 
     this.listFrom = [];
@@ -63,7 +71,7 @@ export class MainLayoutComponent implements OnInit {
     }
 
     this.loadingTo = true;
-    const map = await ymaps.geocode(query, { results: 5 });
+    const map = await ymaps.geocode(query, {results: 5});
     this.loadingTo = false;
 
     this.listTo = [];
@@ -116,8 +124,7 @@ export class MainLayoutComponent implements OnInit {
 
       if (myPlacemark) {
         myPlacemark.geometry.setCoordinates(coords);
-      }
-      else {
+      } else {
         myPlacemark = createPlacemark(coords);
         map.geoObjects.add(myPlacemark);
         myPlacemark.events.add('dragend', function () {
@@ -159,5 +166,15 @@ export class MainLayoutComponent implements OnInit {
         });
       });
     }
+  }
+
+  routeToCabinet() {
+    this.router.navigate(['cab/' + this.user]);
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentToken');
+    location.reload();
   }
 }

@@ -35,10 +35,14 @@
   color: #ffffff;
 }
 
-.button-red{
+.logout-button{
   text-decoration: none;
-  background: rgb(199, 18, 5);
+  background: rgb(191, 29, 36);
   color: #ffffff;
+}
+
+.text-red {
+  color: red;
 }
 
 .fonted {

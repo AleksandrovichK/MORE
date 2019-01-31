@@ -8,14 +8,10 @@ import {PersonalCabinetService} from "../personal-cabinet.service";
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit {
-  result: boolean;
-
   text: string;
-
   results: string[];
 
   registrationForm: FormGroup = this.builder.group({
-      id: [],
       username: [''],
       password: [''],
       email: [''],
@@ -37,21 +33,24 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.result);
   }
 
   onSubmit() {
+    console.log(this.registrationForm.getRawValue().username);
+   this.service.getUserByUsername(this.registrationForm.getRawValue().username)
+      .subscribe(data => {
+        console.log(data);
 
-   this.service.checkEmail(this.registrationForm.getRawValue())
-      .subscribe(data => this.result = data);
-    if (this.result === true) {
-      console.log("User with this email already exists");
-    }/* else {
-      this.service
-        .saveUser(this.registrationForm.getRawValue())
-        .subscribe(res => console.log('Object\'s ID:', res));
-      this.router.navigate(['login/registration/cab']);
-    }*/
+        if (data !== null) {
+          console.log('Такой уже существует');
+        }
+        else {
+          this.service
+            .createUser(this.registrationForm.getRawValue())
+            .subscribe();
+          this.router.navigate(['../../']);
+        }
+      });
   }
 }
 

@@ -4,41 +4,44 @@
     <p>Заполните регистрационную форму</p>
 
     <div class="uk-margin-top">
-      <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" >
         <div class="uk-grid-small" uk-grid>
             <div class="uk-text-left uk-margin-small-top uk-width-1-2">
               <span class="uk-text-meta ">E-mail</span>
-              <input class="uk-input" formControlName="email" placeholder="..." type="email"/>
+              <input class="uk-input" formControlName="email" placeholder="" type="email"/>
             </div>
 
             <div class="uk-text-left uk-margin-small-top uk-width-1-2">
               <span class="uk-text-meta">Пароль</span>
-              <input class="uk-input" formControlName="password" placeholder="..." type="password"/>
+              <input class="uk-input" formControlName="password" placeholder="" type="password"/>
             </div>
             <div class="uk-text-left uk-width-1-1">
-              <span class="uk-text-meta"> Имя и фамилия</span>
-              <input class="uk-input" formControlName="username" placeholder="..." type="text"/>
+              <span class="uk-text-meta">Логин</span>
+              <input class="uk-input" formControlName="username" placeholder="" type="text"/>
             </div>
 
             <div class="uk-text-left">
-              <span class="uk-text-meta">Дата регистрации</span>
-              <p-calendar dateFormat="dd/mm/yy" formControlName="registrationDate"></p-calendar>
+              <span class="uk-text-meta">Дата рождения</span>
+              <p-calendar formControlName="registrationDate" dateFormat="dd/mm/yy" ></p-calendar>
             </div>
-          <div class="uk-text-left">
+         <!-- <div class="uk-text-left">
             <span class="uk-text-meta">Город</span>
             <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
-          </div>
+          </div>-->
 
 
           <div class="uk-width-1-1@s">
-            <div class="uk-align-center uk-margin-medium-top">
-              <button   class="uk-button button-blue"
-
-                      type="submit">Сохранить изменения
+              <button class="uk-align-center uk-margin-medium-top uk-button button-blue"
+                      onclick="UIkit.notification({
+                                    message: '<span uk-icon=\'icon: check\'></span> Успешно создан!',
+                                    status: 'primary',
+                                    pos: 'bottom-right',
+                                    timeout: 1000
+                                    })"
+                      type="submit">Создать
               </button>
             </div>
           </div>
-        </div>
       </form>
     </div>
   </div>

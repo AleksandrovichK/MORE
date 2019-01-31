@@ -1,5 +1,5 @@
-<div class="uk-margin-small-top uk-margin-small-left">
-  <button [routerLink]="''" class="uk-button" type="button"><a class="uk-padding-small" uk-icon="icon: reply"></a>
+<div class="uk-padding-small uk-margin-small-left">
+  <button [routerLink]="'../../'" class="uk-button" type="button"><a class="uk-padding-small" uk-icon="icon: reply"></a>
   </button>
 </div>
 
@@ -7,7 +7,7 @@
   <div class="uk-card uk-card-default uk-card-body">
     <h3 class="uk-card-title">Ваш личный кабинет</h3>
     <div class="uk-margin-top">
-      <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" >
         <div class="uk-grid-small" uk-grid>
 
           <div class="uk-width-1-2 uk-align-center">

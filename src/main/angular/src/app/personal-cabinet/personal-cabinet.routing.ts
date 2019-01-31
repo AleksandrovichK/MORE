@@ -15,7 +15,7 @@ export const routes: Routes = [
       component: RegistrationComponent
     },
     {
-      path: 'login/registration/cab',
+      path: 'cab/:username',
       component: CabComponent,
       canActivate: [AuthGuard]
     }

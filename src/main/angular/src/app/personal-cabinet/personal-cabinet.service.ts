@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {DataClientService} from '../core/data-client.service';
 import {User} from './cab/models/user';
 import {Observable} from 'rxjs';
+import {HttpParams} from "@angular/common/http";
+import {ParamsHelper} from "../core/params-helper";
 
 @Injectable()
 export class PersonalCabinetService {
@@ -9,18 +11,23 @@ export class PersonalCabinetService {
   constructor(private dataClientService: DataClientService) {
   }
 
-  getUserById(UserID): Observable<User> {
-    return this.dataClientService.get('/users/' + UserID);
+  getUserByUsername(username: string){
+   const params: HttpParams = ParamsHelper.toHttpParams({
+     username: username
+   });
+   return this.dataClientService.get('/users/credentials', params);
+ }
+
+  createUser(user): Observable<User> {
+    return this.dataClientService.post('/authentication/sign-up', user);
   }
 
-  saveUser(user): Observable<User> {
+  updateUser(user): Observable<User> {
     return this.dataClientService.post('/users/', user);
   }
-  checkEmail(user):Observable<boolean>{
-    return this.dataClientService.post('/users/check',user);
-  }
-  checkPassword(user):Observable<boolean>{
-    return this.dataClientService.post('/users/sign-up',user);
+
+  signIn(formValue): Observable<any> {
+    return this.dataClientService.post('/authentication/sign-in', formValue)
   }
 }
 

@@ -1,7 +1,10 @@
 <div class="login-padding uk-text-right">
-  <button class="uk-button" [routerLink]="'login'">Войти</button>
-  <button class="uk-button" [routerLink]="'login/registration/cab'">Личный кабинет</button>
+  <button *ngIf="user === null" class="uk-button" [routerLink]="'login'">Войти</button>
+  <button *ngIf="user !== null" class="uk-button" (click)="routeToCabinet()">Личный кабинет</button>
+  <button *ngIf="user !== null" class="uk-button logout-button" (click)="logout()">Выйти</button>
 </div>
+
+<p class="uk-text-center@l uk-margin uk-text-large" *ngIf="user !== null">Добро пожаловать, {{user}}!</p>
 
 <div class="uk-margin uk-card uk-card-default uk-card-body">
   <div class="uk-text-center@l uk-margin uk-text-large">
@@ -22,7 +25,7 @@
       </div>
     </div>
     <div class="uk-margin-bottom uk-text-center">
-        <button class="uk-button button-red" type="submit">Поехали!</button>
+        <button class="uk-button button-blue" type="submit">Поехали!</button>
         </div>
   </form>
 

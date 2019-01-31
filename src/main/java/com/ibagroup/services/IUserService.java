@@ -18,13 +18,8 @@ public interface IUserService {
 
     void deleteById(Long id);
 
-    @Deprecated
-    User save(User user);
+    User create(User user);
 
-    @Deprecated
-    User update(User userDto);
-
-    boolean checkEmail(String email);
-    boolean checkUser(String email, String passwors);
+    void update(User user);
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PersonalCabinetService} from '../personal-cabinet.service';
 
 
@@ -9,8 +9,9 @@ import {PersonalCabinetService} from '../personal-cabinet.service';
   templateUrl: './cab.component.html'
 })
 export class CabComponent implements OnInit {
+  username: string = null;
   userForm: FormGroup = this.builder.group({
-      id: [1],
+      id: [null],
       username: [''],
       password: [''],
       email: [''],
@@ -20,29 +21,37 @@ export class CabComponent implements OnInit {
       isDeleted: [null]
     });
 
-  constructor(private builder: FormBuilder, private router: Router, private service: PersonalCabinetService) {
+  constructor(private builder: FormBuilder, private router: Router, private service: PersonalCabinetService,  private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.service
-      .getUserById(1)
-      .subscribe(data => {
-        this.userForm.patchValue({
-          id: data.id,
-          username: data.username,
-          password: data.password,
-          email: data.email,
-          balance: data.balance,
-          registrationDate: new Date(data.registrationDate),
-          userTypeId: data.userTypeId,
-          isDeleted: data.isDeleted
+    const data = this.route.snapshot.params;
+    this.username = data.username;
+    console.log('username in cab is:', this.username);
+
+    if (this.username != null) {
+      this.service
+        .getUserByUsername(this.username)
+        .subscribe(data => {
+          this.userForm.patchValue({
+            id: data.id,
+            username: data.username,
+            password: data.password,
+            email: data.email,
+            balance: data.balance,
+            registrationDate: new Date(data.registrationDate),
+            userTypeId: data.userTypeId,
+            isDeleted: data.isDeleted
+          });
         });
-      });
+    }
+
   }
 
   onSubmit() {
     this.service
-      .saveUser(this.userForm.getRawValue())
-      .subscribe(res => console.log('Object\'s ID:', res));
+      .updateUser(this.userForm.getRawValue())
+      .subscribe();
+    location.reload();
   }
 }

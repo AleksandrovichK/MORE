@@ -2,20 +2,21 @@
   <div class="uk-card uk-card-default uk-card-body">
     <button class="uk-card-badge uk-label undecorated-button" [routerLink]="'registration'">Зарегистрироваться</button>
     <h3 class="uk-card-title">Вход</h3>
-    <p>Введите ваш логин и пароль</p>
+    <p *ngIf="!wrongCredentials">Введите ваш логин и пароль</p>
+    <p *ngIf="wrongCredentials" class="text-red">Неверный логин или пароль!</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="uk-margin">
         <div class="uk-inline">
           <span class="uk-form-icon" uk-icon="icon: user"></span>
-          <input formControlName="email" class="uk-input" type="text">
+          <input id="usernameInput" formControlName="username" class="uk-input" type="text">
         </div>
       </div>
 
       <div class="uk-margin">
         <div class="uk-inline">
           <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-          <input formControlName="password" class="uk-input" type="text">
+          <input formControlName="password" class="uk-input" type="password">
         </div>
       </div>
 

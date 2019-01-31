@@ -10,6 +10,7 @@ import {ResponseResult} from './models/response-result';
 })
 export class DataClientService {
   baseUrl = environment.apiUrl;
+  withCredentials: true;
   header = new HttpHeaders({
     'content-type': 'application/json'
   });
@@ -20,19 +21,25 @@ export class DataClientService {
   get<T>(url: string, params?: HttpParams): Observable<any> {
     return this.http.get<ResponseResult<T>>(this.baseUrl + url, {headers: this.header, params: params})
       .pipe(
-        map(response => (response.success ? response.data : null)));
+        map(response =>
+          (response? (response.success ? response.data : null): null)
+        ));
   }
 
   post<T>(url: string, body: any = null): Observable<any> {
-    return this.http.post<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header})
+    return this.http.post<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header,  withCredentials: this.withCredentials})
       .pipe(
-        map(response => (response.success ? response.data : null)));
+        map(response =>
+          (response? (response.success ? response.data : null): null)
+        ));
   }
 
   put<T>(url: string, body: any = null): Observable<any> {
     return this.http.put<ResponseResult<T>>(this.baseUrl + url, body, {headers: this.header})
       .pipe(
-        map(response => (response.success ? response.data : null)));
+        map(response =>
+          (response? (response.success ? response.data : null): null)
+        ));
   }
 
   delete(url: string, params?: HttpParams) {

@@ -17,15 +17,16 @@ import com.ibagroup.dto.AuthToken;
 import com.ibagroup.dto.LoginForm;
 import com.ibagroup.dto.RestResponse;
 import com.ibagroup.dto.User;
+import com.ibagroup.services.IUserService;
 import com.ibagroup.services.impl.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/token")
+@RequestMapping("/authentication")
 public class AuthenticationController {
-    private final UserService userService;
-    private final JwtTokenUtil jwtTokenUtil;
-    private final AuthenticationManager authenticationManager;
+    private IUserService userService;
+    private JwtTokenUtil jwtTokenUtil;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService) {
@@ -34,12 +35,24 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity register(@RequestBody LoginForm loginForm) throws AuthenticationException {
+    @RequestMapping(method = RequestMethod.POST, value = "/sign-in")
+    public ResponseEntity signIn(@RequestBody LoginForm loginForm) throws AuthenticationException {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
-        final User user = userService.findOne(loginForm.getUsername());
-        final String token = jwtTokenUtil.generateToken(user);
+        User user = userService.findOne(loginForm.getUsername());
+        String token = jwtTokenUtil.generateToken(user);
         return new ResponseEntity<>(new RestResponse(new AuthToken(token, user.getUsername())), HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sign-up")
+    public ResponseEntity signUp(@RequestBody User user) {
+        User result = userService.create(user);
+
+        if (result != null) {
+            return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }
