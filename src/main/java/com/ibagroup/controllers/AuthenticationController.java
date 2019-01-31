@@ -53,6 +53,4 @@ public class AuthenticationController {
             return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
         }
     }
-
-
 }
