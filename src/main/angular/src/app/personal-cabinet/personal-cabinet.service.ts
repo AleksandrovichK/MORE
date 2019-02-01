@@ -11,9 +11,9 @@ export class PersonalCabinetService {
   constructor(private dataClientService: DataClientService) {
   }
 
-  getUserByUsername(username: string){
+  getUserByLogin(login: string){
    const params: HttpParams = ParamsHelper.toHttpParams({
-     username: username
+     login: login
    });
    return this.dataClientService.get('/users/credentials', params);
  }

@@ -37,10 +37,10 @@ public class AuthenticationController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/sign-in")
     public ResponseEntity signIn(@RequestBody LoginForm loginForm) throws AuthenticationException {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
-        User user = userService.findOne(loginForm.getUsername());
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getLogin(), loginForm.getPassword()));
+        User user = userService.findOne(loginForm.getLogin());
         String token = jwtTokenUtil.generateToken(user);
-        return new ResponseEntity<>(new RestResponse(new AuthToken(token, user.getUsername())), HttpStatus.OK);
+        return new ResponseEntity<>(new RestResponse(new AuthToken(token, user.getLogin())), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sign-up")
@@ -50,7 +50,7 @@ public class AuthenticationController {
         if (result != null) {
             return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new RestResponse(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.OK);
         }
     }
 }

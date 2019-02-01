@@ -8,49 +8,46 @@ import {PersonalCabinetService} from "../personal-cabinet.service";
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit {
-  text: string;
-  results: string[];
+  userExists = false;
 
   registrationForm: FormGroup = this.builder.group({
-      username: [''],
+      login: [''],
       password: [''],
-      email: [''],
-      balance: ['0'],
-      registrationDate: [new Date()],
-      userTypeId: [''],
-      isDeleted: [null]
+      fullname: [''],
     }
   );
-  private mylookupservice: any;
 
   constructor(private builder: FormBuilder, private router: Router, private service: PersonalCabinetService) {
 
-  }
-  search(event) {
-    this.mylookupservice.getResults(event.query).then(data => {
-      this.results = data;
-    });
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log(this.registrationForm.getRawValue().username);
-   this.service.getUserByUsername(this.registrationForm.getRawValue().username)
-      .subscribe(data => {
-        console.log(data);
+    console.log(this.registrationForm.getRawValue());
 
-        if (data !== null) {
-          console.log('Такой уже существует');
-        }
-        else {
+    this.service
+      .createUser(this.registrationForm.getRawValue())
+      .subscribe((answer) => {
+        console.log(answer);
+        if (answer !== null) {
           this.service
-            .createUser(this.registrationForm.getRawValue())
-            .subscribe();
-          this.router.navigate(['../../']);
+            .signIn({login: this.registrationForm.getRawValue().login, password: this.registrationForm.getRawValue().password})
+            .subscribe((authAnswer) => {
+              if (authAnswer !== null) {
+                localStorage.setItem('currentUser', JSON.stringify(authAnswer.login));
+                localStorage.setItem('currentToken', JSON.stringify(authAnswer.token));
+                this.router.navigate(['../../']);
+                this.userExists = false;
+              }
+            });
+        } else {
+          this.userExists = true;
         }
       });
+
+
   }
 }
 

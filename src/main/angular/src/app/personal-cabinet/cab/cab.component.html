@@ -7,48 +7,42 @@
   <div class="uk-card uk-card-default uk-card-body">
     <h3 class="uk-card-title">Ваш личный кабинет</h3>
     <div class="uk-margin-top">
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" >
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="uk-grid-small" uk-grid>
 
           <div class="uk-width-1-2 uk-align-center">
             <div class="uk-text-left">
-              <span class="uk-text-meta"> Имя и фамилия</span>
-              <input class="uk-input" formControlName="username" placeholder="..." type="text"/>
+              <span class="uk-text-meta">Логин</span>
+              <input readonly class="uk-input disabled-field-color" formControlName="login" type="text" [disabled]="disabled"/>
             </div>
 
             <div class="uk-text-left uk-margin-small-top">
-              <span class="uk-text-meta">E-mail</span>
-              <input class="uk-input" [disabled]="true" formControlName="email" placeholder="..." type="email"/>
+              <span class="uk-text-meta">Имя и фамилия</span>
+              <input class="uk-input" formControlName="fullname" type="text"/>
+            </div>
+
+
+            <div class="uk-text-left uk-margin-small-top">
+              <span class="uk-text-meta">Сменить пароль</span>
+              <input class="uk-input" formControlName="password" type="password"/>
             </div>
 
             <div class="uk-text-left uk-margin-small-top">
-              <span class="uk-text-meta">Пароль</span>
-              <input class="uk-input" formControlName="password" placeholder="..." type="password"/>
+              <span class="uk-text-meta field-right-padding">Количество поездок</span>
+              <p-spinner formControlName="travelsCount" [min]="0" [step]="1"></p-spinner>
             </div>
 
             <div class="uk-text-left uk-margin-small-top">
-              <span class="uk-text-meta">Количество поездок</span>
-              <input class="uk-input" formControlName="userTypeId" placeholder="..." type="text"/>
+              <span class="uk-text-meta">Дата регистрации</span>
+              <p-calendar dateFormat="dd/mm/yy" formControlName="registrationDate" [disabled]="disabled"></p-calendar>
             </div>
           </div>
+
 
           <div class="uk-width-1-2">
             <img class="rounded uk-align-right" alt="userphoto" src="https://pp.userapi.com/c849036/v849036924/968a2/oPHJd2wa6tI.jpg">
           </div>
 
-          <div class="uk-width-1-2">
-            <div class="uk-text-left">
-              <span class="uk-text-meta">Баланс</span>
-              <input class="uk-input" formControlName="balance" placeholder="..." type="text"/>
-            </div>
-          </div>
-
-          <div class="uk-width-1-2">
-            <div class="uk-text-left">
-              <span class="uk-text-meta">Дата регистрации</span>
-              <p-calendar dateFormat="dd/mm/yy" formControlName="registrationDate"></p-calendar>
-            </div>
-          </div>
 
           <div class="uk-width-1-1@s">
             <div class="uk-align-center uk-margin-medium-top">

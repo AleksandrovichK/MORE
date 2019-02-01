@@ -1,6 +1,5 @@
 package com.ibagroup.dto;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,35 +21,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "USERNAME", length = 256, nullable = false)
-    private String username;
+    @Column(name = "LOGIN", length = 64, nullable = false)
+    private String login;
     @Column(name = "PASSWORD", length = 64, nullable = false)
     private String password;
-    @Column(name = "EMAIL", length = 64)
-    private String email;
-    @Column(name = "BALANCE", length = 10)
-    private BigDecimal balance;
+    @Column(name = "FULLNAME", length = 256, nullable = false)
+    private String fullname;
+    @Column(name = "ROLE", length = 64, nullable = false)
+    private String role;
     @Temporal(TemporalType.DATE)
     @Column(name = "REG_DATE")
     private Date registrationDate;
-    @Column(name = "USER_TYPE_ID", length = 10)
-    private Short userTypeId;
-    @Column(name = "IS_DELETED_FLAG")
-    private Boolean isDeleted;
+    @Column(name = "TRAVELS_COUNT", length = 5)
+    private Integer travelsCount;
 
     public User() {
     }
 
-    public User(Long id, String username, String email, String password, Date registrationDate, BigDecimal balance, Short userTypeId,
-            Boolean isDeleted) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
+    public User(String login, String password, String fullname, String role, Date registrationDate, Integer travelsCount) {
+        this.login = login;
         this.password = password;
+        this.fullname = fullname;
+        this.role = role;
         this.registrationDate = registrationDate;
-        this.balance = balance;
-        this.userTypeId = userTypeId;
-        this.isDeleted = isDeleted;
+        this.travelsCount = travelsCount;
     }
 
     public Long getId() {
@@ -61,20 +55,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -85,6 +71,22 @@ public class User {
         this.password = password;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Date getRegistrationDate() {
         return registrationDate;
     }
@@ -93,41 +95,11 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public Integer getTravelsCount() {
+        return travelsCount;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public Short getUserTypeId() {
-        return userTypeId;
-    }
-
-    public void setUserTypeId(Short userTypeId) {
-        this.userTypeId = userTypeId;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", balance=" + balance +
-                ", registrationDate=" + registrationDate +
-                ", userTypeId=" + userTypeId +
-                ", isDeleted=" + isDeleted +
-                '}';
+    public void setTravelsCount(Integer travelsCount) {
+        this.travelsCount = travelsCount;
     }
 }

@@ -2,6 +2,7 @@ package com.ibagroup.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,12 +41,12 @@ public class UserService implements UserDetailsService, IUserService {
         dao.deleteById(id);
     }
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = dao.findByUsername(username);
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        User user = dao.findByLogin(login);
         if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Invalid login or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), getAuthority());
     }
 
     private List<SimpleGrantedAuthority> getAuthority() {
@@ -59,8 +60,8 @@ public class UserService implements UserDetailsService, IUserService {
     }
 
     @Override
-    public User findOne(String username) {
-        return dao.findByUsername(username);
+    public User findOne(String login) {
+        return dao.findByLogin(login);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class UserService implements UserDetailsService, IUserService {
     public void update(User userData) {
         User user = findById(userData.getId());
         if (user != null) {
-            BeanUtils.copyProperties(userData, user, "username");
+            BeanUtils.copyProperties(userData, user, "login");
             user.setPassword(encoder.encode(userData.getPassword()));
             dao.save(user);
         }
@@ -81,7 +82,14 @@ public class UserService implements UserDetailsService, IUserService {
 
     @Override
     public User create(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return dao.save(user);
+        User check = findOne(user.getLogin());
+        if (check == null) {
+            user.setRole("ROLE_USER");
+            user.setRegistrationDate(new Date());
+            user.setTravelsCount(0);
+            user.setPassword(encoder.encode(user.getPassword()));
+            return dao.save(user);
+        } else
+            return null;
     }
 }

@@ -13,10 +13,11 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {PersonalCabinetService} from './personal-cabinet.service';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
+import {SpinnerModule} from 'primeng/spinner';
 
 @NgModule({
   imports: [
+    SpinnerModule,
     CalendarModule,
     RouterModule,
     PersonalCabinetRouting,

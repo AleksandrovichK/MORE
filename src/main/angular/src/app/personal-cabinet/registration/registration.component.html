@@ -1,44 +1,29 @@
 <div class="uk-text-center uk-position-center uk-width-1-2">
   <div class="uk-card uk-card-default uk-card-body">
     <h3 class="uk-card-title">Добро пожаловать на наш сайт</h3>
-    <p>Заполните регистрационную форму</p>
+    <p *ngIf="!userExists">Заполните регистрационную форму</p>
+    <p *ngIf="userExists" class="text-red">Пользователь с таким логином уже существует!</p>
 
     <div class="uk-margin-top">
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" >
         <div class="uk-grid-small" uk-grid>
             <div class="uk-text-left uk-margin-small-top uk-width-1-2">
-              <span class="uk-text-meta ">E-mail</span>
-              <input class="uk-input" formControlName="email" placeholder="" type="email"/>
+              <span class="uk-text-meta ">E-mail или логин</span>
+              <input class="uk-input" formControlName="login" placeholder="" type="text"/>
             </div>
 
             <div class="uk-text-left uk-margin-small-top uk-width-1-2">
               <span class="uk-text-meta">Пароль</span>
               <input class="uk-input" formControlName="password" placeholder="" type="password"/>
             </div>
+
             <div class="uk-text-left uk-width-1-1">
-              <span class="uk-text-meta">Логин</span>
-              <input class="uk-input" formControlName="username" placeholder="" type="text"/>
+              <span class="uk-text-meta">Имя и фамилия</span>
+              <input class="uk-input" formControlName="fullname" placeholder="" type="text"/>
             </div>
-
-            <div class="uk-text-left">
-              <span class="uk-text-meta">Дата рождения</span>
-              <p-calendar formControlName="registrationDate" dateFormat="dd/mm/yy" ></p-calendar>
-            </div>
-         <!-- <div class="uk-text-left">
-            <span class="uk-text-meta">Город</span>
-            <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
-          </div>-->
-
 
           <div class="uk-width-1-1@s">
-              <button class="uk-align-center uk-margin-medium-top uk-button button-blue"
-                      onclick="UIkit.notification({
-                                    message: '<span uk-icon=\'icon: check\'></span> Успешно создан!',
-                                    status: 'primary',
-                                    pos: 'bottom-right',
-                                    timeout: 1000
-                                    })"
-                      type="submit">Создать
+              <button class="uk-align-center uk-margin-medium-top uk-button button-blue" type="submit">Создать
               </button>
             </div>
           </div>

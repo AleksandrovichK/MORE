@@ -64,3 +64,12 @@
 .login-padding{
   padding: 1%;
 }
+
+.disabled-field-color {
+  background: #f8f8f8;
+  color: #999;
+}
+
+.field-right-padding {
+  padding-right: 10px;
+}

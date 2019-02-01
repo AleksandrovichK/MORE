@@ -21,5 +21,4 @@ public interface IUserService {
     User create(User user);
 
     void update(User user);
-
 }

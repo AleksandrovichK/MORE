@@ -1,17 +1,16 @@
 package com.ibagroup.dto;
 
 public class AuthToken {
-
+    private String login;
     private String token;
-    private String username;
 
     public AuthToken(){
 
     }
 
-    public AuthToken(String token, String username){
+    public AuthToken(String token, String login){
+        this.login = login;
         this.token = token;
-        this.username = username;
     }
 
     public AuthToken(String token){
@@ -26,11 +25,11 @@ public class AuthToken {
         this.token = token;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

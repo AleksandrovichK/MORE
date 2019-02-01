@@ -34,16 +34,13 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/credentials")
-    public ResponseEntity findByUsername(@RequestParam("username") String username) {
-        User result = service.findOne(username);
-        if (result != null) {
-            result.setPassword(null);
-        }
+    public ResponseEntity findByUsername(@RequestParam("login") String login) {
+        User result = service.findOne(login);
 
         if (result != null) {
             return new ResponseEntity<>(new RestResponse(result), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new RestResponse(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new RestResponse(), HttpStatus.OK);
         }
     }
 

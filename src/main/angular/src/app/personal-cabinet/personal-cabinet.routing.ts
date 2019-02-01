@@ -11,11 +11,11 @@ export const routes: Routes = [
       component: LoginComponent
     },
     {
-      path: 'login/registration',
+      path: 'registration',
       component: RegistrationComponent
     },
     {
-      path: 'cab/:username',
+      path: 'cab/:login',
       component: CabComponent,
       canActivate: [AuthGuard]
     }

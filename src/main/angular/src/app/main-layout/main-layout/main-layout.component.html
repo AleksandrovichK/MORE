@@ -1,5 +1,6 @@
 <div class="login-padding uk-text-right">
   <button *ngIf="user === null" class="uk-button" [routerLink]="'login'">Войти</button>
+  <button *ngIf="user === null" class="uk-button" [routerLink]="'registration'">Зарегистрироваться</button>
   <button *ngIf="user !== null" class="uk-button" (click)="routeToCabinet()">Личный кабинет</button>
   <button *ngIf="user !== null" class="uk-button logout-button" (click)="logout()">Выйти</button>
 </div>

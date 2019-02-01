@@ -9,7 +9,7 @@ import {PersonalCabinetService} from "../personal-cabinet.service";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.builder.group({
-      username: [''],
+      login: [''],
       password: [''],
     }
   );
@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
       .subscribe((authAnswer) => {
         if (authAnswer !== null) {
           console.log(authAnswer);
-          localStorage.setItem('currentUser', JSON.stringify(authAnswer.username));
+          localStorage.setItem('currentUser', JSON.stringify(authAnswer.login));
           localStorage.setItem('currentToken', JSON.stringify(authAnswer.token));
-          this.router.navigate(['/cab/'+authAnswer.username]);
+          this.router.navigate(['/cab/'+authAnswer.login]);
           this.wrongCredentials = false;
         } else {
           this.wrongCredentials = true;

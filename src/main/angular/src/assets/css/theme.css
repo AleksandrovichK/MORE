@@ -1346,7 +1346,7 @@ li.divider, tr.divider{
 }
 
 .ui-calendar .ui-inputtext {
-  width: 90%;
+  width: 100%;
   height: 25px;
   border-radius: 0px;
   display: inline-block;
@@ -1364,12 +1364,12 @@ li.divider, tr.divider{
 }
 
 body .ui-datepicker table.ui-datepicker-calendar td:not(.ui-state-disabled) a.ui-state-active {
-  background-color: #0bd28e;
+  background-color: #007ad9;
 }
 
 body .ui-button:focus, body .ui-button:enabled:hover {
   outline: 0 none;
-  background-color: #0bd28e;
+  background-color: #0063bb;
 }
 
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
@@ -1377,7 +1377,7 @@ body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
 }
 
 body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
-  background-color: #0bd28e;
+  background-color: #007ad9;
   color: #ffffff;
 }
 
