@@ -67,6 +67,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onSubmit() {
+    alert('Wroom-wroom!');
   }
 
   public async searchFrom(query) {

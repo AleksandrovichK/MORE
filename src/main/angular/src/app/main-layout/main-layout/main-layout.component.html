@@ -21,7 +21,7 @@
           <app-autocomplete [loading]="loadingTo" [suggestions]="listTo" (valueChanges)="searchTo($event)" (selectSuggestion)="selectTo($event)"  [defaultText]="'Куда'"></app-autocomplete>
         </div>
         <div class="uk-width-1-3@s">
-            <p-multiSelect [options]="travelWays" formControlName="selectedCities" defaultLabel="Способы путешествия"></p-multiSelect>
+            <p-multiSelect [options]="travelWays" formControlName="selectedCities" maxSelectedLabels="100" defaultLabel="Способы путешествия"></p-multiSelect>
         </div>
       </div>
     </div>
