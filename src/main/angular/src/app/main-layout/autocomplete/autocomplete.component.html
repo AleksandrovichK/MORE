@@ -1,4 +1,4 @@
-<input class="uk-width-1-1" autocomplete="off" onblur="hideSuggestions()" placeholder="{{defaultText}}" #autocomplete>
+<input class="uk-width-1-1" autocomplete="off" placeholder="{{defaultText}}" #autocomplete>
 
 <div class="spinner" *ngIf="loading">
   <svg xmlns:xlink="http://www.w3.org/1999/xlink" class="lds-coolors" width="30px" height="30px"
@@ -40,8 +40,7 @@
 </div>
 <div class="suggestions-wrapper" *ngIf="suggestions.length">
   <div class="suggestions" *ngFor="let suggestion of suggestions" @fadeIn>
-    <div class="suggestion" (click)="selectSuggestion.emit(suggestion); autocomplete.value = suggestion">{{ suggestion
-      }}
+    <div class="suggestion" (click)="selectSuggestion.emit(suggestion); autocomplete.value = suggestion">{{ suggestion}}
     </div>
   </div>
 </div>

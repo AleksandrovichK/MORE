@@ -5,11 +5,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainLayoutService} from './main-layout.service';
 import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {RouterModule} from '@angular/router';
-import {DialogModule} from 'primeng/dialog';
 import {MainLayoutRoutingModule} from './main-layout.routing';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import {AutoCompleteModule} from 'primeng/autocomplete';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AutocompleteComponent} from './autocomplete/autocomplete.component';
 

@@ -11,6 +11,8 @@ declare const ymaps: any;
   templateUrl: './main-layout.component.html'
 })
 export class MainLayoutComponent implements OnInit {
+  map: any = null;
+
   properties: object;
   travelWays = [
     {label: 'Самолётом', value: {id: 1}},
@@ -19,13 +21,18 @@ export class MainLayoutComponent implements OnInit {
     {label: 'Машиной', value: {id: 4}},
     {label: 'Пешком', value: {id: 5}}
   ];
+
   info: string;
+  user: string = null;
+
   listFrom: string[] = [];
   listTo: string[] = [];
-  user: string = null;
 
   loadingFrom = false;
   loadingTo = false;
+
+  pointFrom : any;
+  pointTo : any;
 
   searchForm: FormGroup = this.builder.group({
       from: [null],
@@ -47,20 +54,34 @@ export class MainLayoutComponent implements OnInit {
     ymaps.ready(this.initMap.bind(this));
   }
 
+  initMap() {
+    this.map = new ymaps.Map('map', {
+      center: [50.450100, 30.523400],
+      zoom: 1,
+      controls: []
+    });
+
+    this.map.setType('yandex#hybrid');
+    this.map.setZoom(5);
+    this.map.cursors.push('crosshair');
+  }
+
+  onSubmit() {
+  }
+
   public async searchFrom(query) {
     if (query.length <= 2) {
       return;
     }
 
     this.loadingFrom = true;
-    const map = await ymaps.geocode(query, {results: 5});
+    let container = await ymaps.geocode(query, {results: 5});
     this.loadingFrom = false;
 
     this.listFrom = [];
-
-    map.geoObjects.each((city) => {
+    container.geoObjects.each((city) => {
       if (city.properties.get('metaDataProperty.GeocoderMetaData.kind') === 'locality') {
-        this.listFrom.push(city.properties.get('name'));
+        this.listFrom.push(city.properties.get('text'));
       }
     });
   }
@@ -71,101 +92,50 @@ export class MainLayoutComponent implements OnInit {
     }
 
     this.loadingTo = true;
-    const map = await ymaps.geocode(query, {results: 5});
+    let container = await ymaps.geocode(query, {results: 5});
     this.loadingTo = false;
 
     this.listTo = [];
 
-    map.geoObjects.each((city) => {
+    container.geoObjects.each((city) => {
       if (city.properties.get('metaDataProperty.GeocoderMetaData.kind') === 'locality') {
-        this.listTo.push(city.properties.get('name'));
+        this.listTo.push(city.properties.get('text'));
       }
     });
-
-    console.log(this.listTo);
   }
 
   public selectFrom(suggestion) {
     this.listFrom = [];
+
+    ymaps.geocode(suggestion, {
+      results: 1
+    }).then((res) => {
+      this.pointFrom = res.geoObjects.get(0);
+      this.pointFrom.options.set('preset', 'islands#circleIcon');
+      this.pointFrom.options.set('iconColor', '#a61c21');
+      this.pointFrom.properties.set('iconCaption', this.pointFrom.getAddressLine());
+
+      this.map.geoObjects.removeAll();
+      this.map.geoObjects.add(this.pointFrom);
+      this.map.geoObjects.add(this.pointTo);
+    });
   }
 
   public selectTo(suggestion) {
     this.listTo = [];
-  }
 
-  onSubmit() {
-  }
+    ymaps.geocode(suggestion, {
+      results: 1
+    }).then((res) => {
+      this.pointTo = res.geoObjects.get(0);
+      this.pointTo.options.set('preset', 'islands#circleIcon');
+      this.pointTo.options.set('iconColor', '#0d24a6');
+      this.pointTo.properties.set('iconCaption', this.pointTo.getAddressLine());
 
-  initMap() {
-    var map = new ymaps.Map('map', {
-      center: [50.450100, 30.523400],
-      zoom: 5,
-      controls: []
+      this.map.geoObjects.removeAll();
+      this.map.geoObjects.add(this.pointTo);
+      this.map.geoObjects.add(this.pointFrom);
     });
-
-    map.setType('yandex#hybrid');
-
-    ymaps.geolocation.get({
-      provider: 'browser',
-    }).then((result) => {
-      result.geoObjects.options.set('preset', 'islands#redDotIcon');
-      map.geoObjects.add(result.geoObjects);
-    });
-
-    map.setZoom(5);
-    map.cursors.push('crosshair');
-    this.configureMapClicking(map);
-  }
-
-  private configureMapClicking(map) {
-    let myPlacemark;
-    map.events.add('click', (e) => {
-      const coords = e.get('coords');
-
-      if (myPlacemark) {
-        myPlacemark.geometry.setCoordinates(coords);
-      } else {
-        myPlacemark = createPlacemark(coords);
-        map.geoObjects.add(myPlacemark);
-        myPlacemark.events.add('dragend', function () {
-          getAddress(myPlacemark.geometry.getCoordinates());
-        });
-      }
-      map.setCenter(ymaps.geoQuery(coords).getCenter());
-      getAddress(coords);
-    });
-
-
-    function createPlacemark(coords) {
-      return new ymaps.Placemark(coords, {
-        iconCaption: ''
-      }, {
-        preset: 'islands#blueDotIcon',
-        draggable: true
-      });
-    }
-
-    function getAddress(coords) {
-      ymaps.geocode(coords).then((res) => {
-        var firstGeoObject = res.geoObjects.get(0);
-
-        /*   myPlacemark.properties.set({
-             // Формируем строку с данными об объекте.
-             iconCaption: [
-               // Название населенного пункта или вышестоящее административно-территориальное образование.
-               firstGeoObject.getLocalities().length ? firstGeoObject.getLocalities() : firstGeoObject.getAdministrativeAreas()/!*,
-               // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
-               firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()*!/
-             ].filter(Boolean).join(', '),
-             // В качестве контента балуна задаем строку с адресом объекта.
-             balloonContent: firstGeoObject.getAddressLine()
-           });*/
-
-        this.searchForm.patchValue({
-          to: firstGeoObject.getLocalities(),
-        });
-      });
-    }
   }
 
   routeToCabinet() {
