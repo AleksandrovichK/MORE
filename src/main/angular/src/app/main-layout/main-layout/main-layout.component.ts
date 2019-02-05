@@ -31,18 +31,15 @@ export class MainLayoutComponent implements OnInit {
   loadingFrom = false;
   loadingTo = false;
 
-  pointFrom : any;
-  pointTo : any;
-
-  country: string;
+  pointFrom: any;
+  pointTo: any;
 
   searchForm: FormGroup = this.builder.group({
-      fromС: [null],
-      toC: [null],
+      from: [null],
+      to: [null],
       selectedCities: []
     }
   );
-
 
   constructor(private service: MainLayoutService, private builder: FormBuilder, private router: Router) {
   }
@@ -69,9 +66,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onSubmit() {
-    //alert('Wroom-wroom!');
-
-    console.log(this.listTo);
+    console.log(this.searchForm.getRawValue());
   }
 
   public async searchFrom(query) {
@@ -87,7 +82,6 @@ export class MainLayoutComponent implements OnInit {
     container.geoObjects.each((city) => {
       if (city.properties.get('metaDataProperty.GeocoderMetaData.kind') === 'locality') {
         this.listFrom.push(city.properties.get('text'));
-        //this.listFrom.push(city.properties.get('name'));
       }
     });
   }
@@ -110,7 +104,7 @@ export class MainLayoutComponent implements OnInit {
     });
   }
 
-  public selectFrom(suggestion) {
+  public selectFrom(suggestion: string) {
     this.listFrom = [];
 
     ymaps.geocode(suggestion, {
@@ -125,9 +119,17 @@ export class MainLayoutComponent implements OnInit {
       this.map.geoObjects.add(this.pointFrom);
       this.map.geoObjects.add(this.pointTo);
     });
+
+    if (suggestion.indexOf(',') !== null) {
+      suggestion = suggestion.substring(suggestion.lastIndexOf(',') + 2);
+    }
+
+    this.searchForm.patchValue({
+      from: suggestion
+    });
   }
 
-  public selectTo(suggestion) {
+  public selectTo(suggestion: string) {
     this.listTo = [];
 
     ymaps.geocode(suggestion, {
@@ -141,6 +143,14 @@ export class MainLayoutComponent implements OnInit {
       this.map.geoObjects.removeAll();
       this.map.geoObjects.add(this.pointTo);
       this.map.geoObjects.add(this.pointFrom);
+    });
+
+    if (suggestion.indexOf(',') !== null) {
+      suggestion = suggestion.substring(suggestion.lastIndexOf(',') + 2);
+    }
+
+    this.searchForm.patchValue({
+      to: suggestion
     });
   }
 

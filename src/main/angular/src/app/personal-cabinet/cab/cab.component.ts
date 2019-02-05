@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PersonalCabinetService} from '../personal-cabinet.service';
-import {computeStyle} from "@angular/animations/browser/src/util";
 
 
 @Component({
