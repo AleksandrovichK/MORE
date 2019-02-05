@@ -15,7 +15,7 @@
     <div class="uk-margin-top uk-margin-bottom">
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-3@s">
-          <app-autocomplete [loading]="loadingFrom" [suggestions]="listFrom" (valueChanges)="searchFrom($event)" (selectSuggestion)="selectFrom($event)" [defaultText]="'Откуда'"></app-autocomplete>
+          <app-autocomplete formControlName="from" [loading]="loadingFrom" [suggestions]="listFrom" (valueChanges)="searchFrom($event)" (selectSuggestion)="selectFrom($event)" [defaultText]="'Откуда'" ></app-autocomplete>
         </div>
         <div class="uk-width-1-3@s">
           <app-autocomplete [loading]="loadingTo" [suggestions]="listTo" (valueChanges)="searchTo($event)" (selectSuggestion)="selectTo($event)"  [defaultText]="'Куда'"></app-autocomplete>

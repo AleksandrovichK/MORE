@@ -34,9 +34,11 @@ export class MainLayoutComponent implements OnInit {
   pointFrom : any;
   pointTo : any;
 
+  country: string;
+
   searchForm: FormGroup = this.builder.group({
-      from: [null],
-      to: [null],
+      fromС: [null],
+      toC: [null],
       selectedCities: []
     }
   );
@@ -67,7 +69,9 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onSubmit() {
-    alert('Wroom-wroom!');
+    //alert('Wroom-wroom!');
+
+    console.log(this.listTo);
   }
 
   public async searchFrom(query) {
@@ -83,6 +87,7 @@ export class MainLayoutComponent implements OnInit {
     container.geoObjects.each((city) => {
       if (city.properties.get('metaDataProperty.GeocoderMetaData.kind') === 'locality') {
         this.listFrom.push(city.properties.get('text'));
+        //this.listFrom.push(city.properties.get('name'));
       }
     });
   }
